@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{51DAC5F1-FFD4-4A16-9499-C29989213167}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.API", "src\EnglishTrainer.API\EnglishTrainer.API.csproj", "{D071D094-6523-4FA6-AE3D-D8C488F2D392}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Web", "src\EnglishTrainer.Web\EnglishTrainer.Web.csproj", "{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D071D094-6523-4FA6-AE3D-D8C488F2D392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D071D094-6523-4FA6-AE3D-D8C488F2D392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D071D094-6523-4FA6-AE3D-D8C488F2D392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D071D094-6523-4FA6-AE3D-D8C488F2D392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D071D094-6523-4FA6-AE3D-D8C488F2D392} = {51DAC5F1-FFD4-4A16-9499-C29989213167}
+		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8} = {51DAC5F1-FFD4-4A16-9499-C29989213167}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89DB996E-A58C-4E55-8B32-4BBEF73D6C26}
+	EndGlobalSection
+EndGlobal
