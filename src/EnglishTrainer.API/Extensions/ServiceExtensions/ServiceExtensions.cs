@@ -1,5 +1,7 @@
 ﻿using EnglishTrainer.Contracts;
+using EnglishTrainer.Entities;
 using EnglishTrainer.LoggerService;
+using Microsoft.EntityFrameworkCore;
 
 namespace EnglishTrainer.API.Extensions.ServiceExtensions
 {
@@ -21,5 +23,9 @@ namespace EnglishTrainer.API.Extensions.ServiceExtensions
 
         public static void ConfigureLoggerService(this IServiceCollection services) => 
             services.AddScoped<ILoggerManager, LoggerManager>();
+
+        public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) => 
+            services.AddDbContext<EFContext>(opts => 
+            opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
     }
 }
