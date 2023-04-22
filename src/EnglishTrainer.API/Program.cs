@@ -12,9 +12,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #region From ServiceExtensions
-builder.Services.ConfigureCors();
-builder.Services.ConfigureIISIntegration();
-builder.Services.ConfigureLoggerService();
+builder.Services.ConfigureCors(); 
+builder.Services.ConfigureIISIntegration(); 
+builder.Services.ConfigureLoggerService(); //NLog
+builder.Services.ConfigureSqlContext(builder.Configuration); //EF
 #endregion
 
 
