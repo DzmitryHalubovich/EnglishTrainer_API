@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.API", "src\E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Web", "src\EnglishTrainer.Web\EnglishTrainer.Web.csproj", "{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishTrainer.LoggerService", "src\EnglishTrainer.LoggerService\EnglishTrainer.LoggerService.csproj", "{A8738BED-197B-46C7-9F42-690EAC9A86F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.LoggerService", "src\EnglishTrainer.LoggerService\EnglishTrainer.LoggerService.csproj", "{A8738BED-197B-46C7-9F42-690EAC9A86F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishTrainer.Contracts", "src\EnglishTrainer.Contracts\EnglishTrainer.Contracts.csproj", "{8567F291-AF66-4B5E-A04E-8C3265314CF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Contracts", "src\EnglishTrainer.Contracts\EnglishTrainer.Contracts.csproj", "{8567F291-AF66-4B5E-A04E-8C3265314CF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
