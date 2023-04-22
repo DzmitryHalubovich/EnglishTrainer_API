@@ -1,4 +1,7 @@
-﻿namespace EnglishTrainer.API.Extensions.ServiceExtensions
+﻿using EnglishTrainer.Contracts;
+using EnglishTrainer.LoggerService;
+
+namespace EnglishTrainer.API.Extensions.ServiceExtensions
 {
     public static class ServiceExtensions
     {
@@ -15,5 +18,8 @@
         public static void ConfigureIISIntegration(this IServiceCollection services) => 
             services.Configure<IISOptions>(options => {
         });
+
+        public static void ConfigureLoggerService(this IServiceCollection services) => 
+            services.AddScoped<ILoggerManager, LoggerManager>();
     }
 }
