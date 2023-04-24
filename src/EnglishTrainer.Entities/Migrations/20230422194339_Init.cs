@@ -18,8 +18,8 @@ namespace EnglishTrainer.Entities.Migrations
                     name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     translations = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Modified = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    modified = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

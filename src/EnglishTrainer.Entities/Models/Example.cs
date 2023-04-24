@@ -22,6 +22,7 @@ namespace EnglishTrainer.Entities.Models
         [MaxLength(256, ErrorMessage = "Maximum lenth for the Russian sentece is 256 characters.")]
         public string? RussianSentence { get; set; }
 
+        [Column("word_id")]
         [ForeignKey(nameof(Word))]
         public Guid WordId { get; set; }
         public Word Word { get; set; }
