@@ -1,4 +1,4 @@
-﻿using EnglishTrainer.Contracts;
+﻿using EnglishTrainer.Contracts.Logger;
 using NLog;
 using System;
 using System.Collections.Generic;

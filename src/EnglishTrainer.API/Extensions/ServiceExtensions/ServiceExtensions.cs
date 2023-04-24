@@ -1,6 +1,8 @@
 ﻿using EnglishTrainer.Contracts;
+using EnglishTrainer.Contracts.Logger;
 using EnglishTrainer.Entities;
 using EnglishTrainer.LoggerService;
+using EnglishTrainer.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EnglishTrainer.API.Extensions.ServiceExtensions
@@ -27,5 +29,8 @@ namespace EnglishTrainer.API.Extensions.ServiceExtensions
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) => 
             services.AddDbContext<EFContext>(opts => 
             opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
+
+        public static void ConfigureRepositoryManager(this IServiceCollection services) => 
+            services.AddScoped<IServiceManager, ServiceManager>();
     }
 }
