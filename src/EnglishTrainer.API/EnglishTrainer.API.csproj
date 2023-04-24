@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EnglishTrainer.Entities\EnglishTrainer.Entities.csproj" />
     <ProjectReference Include="..\EnglishTrainer.LoggerService\EnglishTrainer.LoggerService.csproj" />
+    <ProjectReference Include="..\EnglishTrainer.Services\EnglishTrainer.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnglishTrainer.Contracts
+namespace EnglishTrainer.Contracts.Logger
 {
     public interface ILoggerManager
     {

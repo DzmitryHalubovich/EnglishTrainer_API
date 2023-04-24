@@ -1,4 +1,5 @@
 using EnglishTrainer.Contracts;
+using EnglishTrainer.Contracts.Logger;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishTrainer.API.Controllers;
@@ -8,9 +9,11 @@ namespace EnglishTrainer.API.Controllers;
 public class WeatherForecastController : ControllerBase
 {
     private readonly ILoggerManager _logger;
-    public WeatherForecastController(ILoggerManager logger)
+    private readonly IServiceManager _serviceManager;
+    public WeatherForecastController(ILoggerManager logger, IServiceManager serviceManager)
     {
         _logger = logger;
+        _serviceManager=serviceManager;
     }
 
     private static readonly string[] Summaries = new[]
@@ -19,12 +22,17 @@ public class WeatherForecastController : ControllerBase
     };
 
     [HttpGet] 
-    public IEnumerable<string> Get() 
+    public ActionResult<IEnumerable<string>> Get() 
     {
-        _logger.LogInfo("Here is info message from our values controller.");
-        _logger.LogDebug("Here is debug message from our values controller.");
-        _logger.LogWarn("Here is warn message from our values controller.");
-        _logger.LogError("Here is an error message from our values controller.");
+        _serviceManager.Word.ToString();
+        _serviceManager.IrregularVerb.ToString();
+        _serviceManager.Example.ToString();
+
+
+        //_logger.LogInfo("Here is info message from our values controller.");
+        //_logger.LogDebug("Here is debug message from our values controller.");
+        //_logger.LogWarn("Here is warn message from our values controller.");
+        //_logger.LogError("Here is an error message from our values controller.");
 
         return new string[] { "value1", "value2" };
     }
