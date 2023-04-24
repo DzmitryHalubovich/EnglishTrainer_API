@@ -10,6 +10,7 @@ namespace EnglishTrainer.Entities.Models
 {
     public class Word
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("id")]
         public Guid Id { get; set; }
 
@@ -25,10 +26,10 @@ namespace EnglishTrainer.Entities.Models
         [Column("description")]
         [MaxLength(512, ErrorMessage = "Maximum lenth for the Description is 512 characters.")]
         public string? Description { get; set; }
-        [Column("created")]
-        public DateTime Created { get; set; }
-        [Column("modified")]
-        public DateTime Modified { get; set; }
+        //[Column("created")]
+        //public DateTime Created { get; set; }
+        //[Column("modified")]
+        //public DateTime Modified { get; set; }
 
 
         public ICollection<Example> Examples { get; set; }

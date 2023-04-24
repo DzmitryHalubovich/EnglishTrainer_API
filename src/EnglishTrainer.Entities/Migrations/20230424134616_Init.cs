@@ -1,6 +1,7 @@
-﻿#nullable disable
-
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
 
 namespace EnglishTrainer.Entities.Migrations
 {
@@ -17,9 +18,7 @@ namespace EnglishTrainer.Entities.Migrations
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     translations = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    modified = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,23 +48,23 @@ namespace EnglishTrainer.Entities.Migrations
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     english_sentence = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     russian_sentence = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    WordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    word_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Examples", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Examples_Dictionary_WordId",
-                        column: x => x.WordId,
+                        name: "FK_Examples_Dictionary_word_id",
+                        column: x => x.word_id,
                         principalTable: "Dictionary",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Examples_WordId",
+                name: "IX_Examples_word_id",
                 table: "Examples",
-                column: "WordId");
+                column: "word_id");
         }
 
         /// <inheritdoc />

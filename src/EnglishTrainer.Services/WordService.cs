@@ -8,6 +8,9 @@ namespace EnglishTrainer.Services
     {
         public WordService(EFContext dbContext) : base(dbContext) { }
 
-
+        public IEnumerable<Word> GetAll(bool trackChanges) => 
+            FindAll(trackChanges)
+            .OrderBy(c=>c.Name)
+            .ToList();
     }
 }
