@@ -8,6 +8,13 @@ namespace EnglishTrainer.Services
     {
         public WordService(EFContext dbContext) : base(dbContext) { }
 
+        public IEnumerable<Word> GetAll(bool trackChanges) => 
+            FindAll(trackChanges)
+            .OrderBy(c=>c.Name)
+            .ToList();
 
+        public Word GetWord(Guid wordId, bool trackChanges) =>
+            FindByCondition(w => w.Id.Equals(wordId), trackChanges)
+            .SingleOrDefault();
     }
 }

@@ -41,7 +41,8 @@ namespace EnglishTrainer.Entities.Migrations
                         .HasColumnName("russian_sentence");
 
                     b.Property<Guid>("WordId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("word_id");
 
                     b.HasKey("Id");
 
@@ -95,16 +96,10 @@ namespace EnglishTrainer.Entities.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)")
                         .HasColumnName("description");
-
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
