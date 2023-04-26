@@ -35,6 +35,7 @@ namespace EnglishTrainer.API.Controllers
 
         }
 
+
         //Name - дает название URL-у метода, в строке 77 по названию мы вызываем этот метод по его названию
         [HttpGet("{id}", Name = "WordById")]
         public IActionResult GetWord(Guid id)
@@ -52,7 +53,6 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPost]
-
         //Данные приходят из тела запроса, а не из URL,так что пишем FromBody
         public IActionResult CreateWord([FromBody] WordCreateDTO word)
         {

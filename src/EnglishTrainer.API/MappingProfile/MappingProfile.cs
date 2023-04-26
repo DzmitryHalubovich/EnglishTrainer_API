@@ -14,6 +14,8 @@ namespace EnglishTrainer.API.MappingProfile
             CreateMap<Example, ExampleDTO>();
 
             CreateMap<WordCreateDTO, Word>();
+
+            CreateMap<ExampleCreateDTO, Example>();
         }
 
     }

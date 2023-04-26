@@ -8,6 +8,12 @@ namespace EnglishTrainer.Services
     {
         public ExampleService(EFContext dbContext) : base(dbContext) { }
 
+        public void CreateForWord(Guid wordId, Example example)
+        {
+            example.WordId = wordId;
+            Create(example);
+        }
+
         public Example Get(Guid wordId, Guid id, bool trackChanges) =>
             FindByCondition(e => e.WordId.Equals(wordId) 
             && e.Id.Equals(id), trackChanges)

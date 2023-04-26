@@ -4,6 +4,8 @@ using EnglishTrainer.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EnglishTrainer.Entities.DTO.Read;
+using EnglishTrainer.Entities.DTO.Create;
+using EnglishTrainer.Entities.Models;
 
 namespace EnglishTrainer.API.Controllers
 {
@@ -11,6 +13,7 @@ namespace EnglishTrainer.API.Controllers
     [ApiController]
     public class ExampleController : ControllerBase
     {
+        #region Constructor and DI propherties
         private readonly IServiceManager _serviceManager;
         private readonly ILoggerManager _loggerManager;
         private readonly IMapper _mapper;
@@ -22,7 +25,9 @@ namespace EnglishTrainer.API.Controllers
             _loggerManager=loggerManager;
             _mapper=mapper;
         }
+        #endregion
 
+        #region Get "..." Get all examples for word method
         [HttpGet]
         public IActionResult GetAllForWord(Guid wordId)
         {
@@ -46,8 +51,10 @@ namespace EnglishTrainer.API.Controllers
 
             return Ok(examplesDto);
         }
+        #endregion
 
-        [HttpGet("{id}")]
+        #region Get ".../{id}" Get single example for word
+        [HttpGet("{id}", Name = "GetExampleById")]
         public IActionResult GetSingleForWord(Guid wordId, Guid id)
         {
             var word = _serviceManager.Word.GetWord(wordId, trackChanges:false);
@@ -68,6 +75,37 @@ namespace EnglishTrainer.API.Controllers
 
             var exampleDto = _mapper.Map<ExampleDTO>(example);
             return Ok(exampleDto);
+        }
+        #endregion
+
+        [HttpPost]
+        public IActionResult CreateExampleForWord(Guid wordId,
+            [FromBody] ExampleCreateDTO example)
+        {
+            if (example == null)
+            {
+                _loggerManager.LogError("ExampleCreateDTO object sent from client is null.");
+                return BadRequest("ExampleCreateDTO object is null");
+            }
+
+            var word = _serviceManager.Word.GetWord(wordId, trackChanges:false);
+
+            if (word == null)
+            {
+                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            var exampleEntity = _mapper.Map<Example>(example);
+
+            _serviceManager.Example.CreateForWord(wordId, exampleEntity);
+            _serviceManager.Save();
+
+            var exampleToReturn = _mapper.Map<ExampleDTO>(exampleEntity);
+
+            return CreatedAtRoute("GetExampleById",
+                new { wordId, id = exampleToReturn.Id }, exampleToReturn);
+
         }
     }
 }
