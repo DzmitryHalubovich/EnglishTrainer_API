@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using EnglishTrainer.Entities.DTO;
+using EnglishTrainer.Entities.DTO.Create;
+using EnglishTrainer.Entities.DTO.Read;
 using EnglishTrainer.Entities.Models;
 
 namespace EnglishTrainer.API.MappingProfile
@@ -11,6 +12,8 @@ namespace EnglishTrainer.API.MappingProfile
             CreateMap<Word, WordDTO>();
 
             CreateMap<Example, ExampleDTO>();
+
+            CreateMap<WordCreateDTO, Word>();
         }
 
     }

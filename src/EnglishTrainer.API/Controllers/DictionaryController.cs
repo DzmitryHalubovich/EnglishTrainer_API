@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using EnglishTrainer.Contracts;
 using EnglishTrainer.Contracts.Logger;
-using EnglishTrainer.Entities.DTO;
-using Microsoft.AspNetCore.Http;
+using EnglishTrainer.Entities.DTO.Create;
+using EnglishTrainer.Entities.DTO.Read;
+using EnglishTrainer.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishTrainer.API.Controllers
@@ -34,7 +35,8 @@ namespace EnglishTrainer.API.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        //Name - дает название URL-у метода, в строке 77 по названию мы вызываем этот метод по его названию
+        [HttpGet("{id}", Name = "WordById")]
         public IActionResult GetWord(Guid id)
         {
             var word = _serviceManager.Word.GetWord(id, trackChanges: false);
@@ -46,6 +48,34 @@ namespace EnglishTrainer.API.Controllers
 
             var wordDto = _mapper.Map<WordDTO>(word);
             return Ok(wordDto);
+        }
+
+
+        [HttpPost]
+
+        //Данные приходят из тела запроса, а не из URL,так что пишем FromBody
+        public IActionResult CreateWord([FromBody] WordCreateDTO word)
+        {
+            //TODO переделать сервисы под репозитории, добавить новые сервисы
+
+
+            //Если не можем десирелизовать, возвращаем BadRequest
+            if (word == null)
+            {
+                _loggerManager.LogError("WordCreateDTO object from client is null.");
+                return BadRequest("WordCreateDTO object is null");
+            }
+
+            var wordEntity = _mapper.Map<Word>(word);
+
+            _serviceManager.Word.CreateWord(wordEntity);
+            _serviceManager.Save();
+
+            var wordToReturn = _mapper.Map<WordDTO>(wordEntity);
+
+            //Call another method from controller to represent a new item 
+            return CreatedAtRoute("WordById", new { id = wordToReturn.Id },
+                wordToReturn);
         }
     }
 }

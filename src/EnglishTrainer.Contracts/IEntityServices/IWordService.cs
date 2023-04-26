@@ -7,5 +7,6 @@ namespace EnglishTrainer.Contracts.EntitiesServices
     {
         IEnumerable<Word> GetAll(bool trackChanges);
         Word GetWord(Guid wordId, bool trackChanges);
+        void CreateWord(Word word);
     }
 }

@@ -3,7 +3,7 @@ using EnglishTrainer.Contracts.Logger;
 using EnglishTrainer.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using EnglishTrainer.Entities.DTO;
+using EnglishTrainer.Entities.DTO.Read;
 
 namespace EnglishTrainer.API.Controllers
 {

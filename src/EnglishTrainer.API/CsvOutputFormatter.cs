@@ -1,4 +1,4 @@
-﻿using EnglishTrainer.Entities.DTO;
+﻿using EnglishTrainer.Entities.DTO.Read;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using System.Text;

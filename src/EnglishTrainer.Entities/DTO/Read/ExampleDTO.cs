@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnglishTrainer.Entities.DTO
+namespace EnglishTrainer.Entities.DTO.Read
 {
     public class ExampleDTO
     {
