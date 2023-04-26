@@ -9,8 +9,12 @@ using NLog;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//Ќастройка позвол€ет возвращать XML формат если добавить заголовок в запрос
+builder.Services.AddControllers(config =>
+{
+    config.RespectBrowserAcceptHeader = true;
+}).AddXmlDataContractSerializerFormatters();
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
