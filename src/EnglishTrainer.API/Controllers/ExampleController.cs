@@ -46,5 +46,28 @@ namespace EnglishTrainer.API.Controllers
 
             return Ok(examplesDto);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetSingleForWord(Guid wordId, Guid id)
+        {
+            var word = _serviceManager.Word.GetWord(wordId, trackChanges:false);
+
+            if (word == null)
+            {
+                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            var example = _serviceManager.Example.Get(wordId, id, trackChanges: false);
+
+            if (example == null)
+            {
+                _loggerManager.LogInfo($"Example with id: {id} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            var exampleDto = _mapper.Map<ExampleDTO>(example);
+            return Ok(exampleDto);
+        }
     }
 }

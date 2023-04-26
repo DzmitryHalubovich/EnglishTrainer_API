@@ -8,8 +8,14 @@ namespace EnglishTrainer.Services
     {
         public ExampleService(EFContext dbContext) : base(dbContext) { }
 
+        public Example Get(Guid wordId, Guid id, bool trackChanges) =>
+            FindByCondition(e => e.WordId.Equals(wordId) 
+            && e.Id.Equals(id), trackChanges)
+            .SingleOrDefault();
+
         public IEnumerable<Example> GetAll(Guid wordId, bool trackChanges) =>
              FindByCondition(e=>e.WordId.Equals(wordId),trackChanges)
             .OrderBy(e=>e.Id);
     }
+
 }
