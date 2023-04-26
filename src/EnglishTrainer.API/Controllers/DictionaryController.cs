@@ -24,7 +24,7 @@ namespace EnglishTrainer.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetWords()
+        public IActionResult GetAllWords()
         {
 
             var dictionary = _serviceManager.Word.GetAll(trackChanges: false);
@@ -33,6 +33,28 @@ namespace EnglishTrainer.API.Controllers
 
             return Ok(dictionaryDTO);
 
+        }
+
+
+        [HttpGet("collection/({ids})", Name = "WordsCollection")]
+        public IActionResult GetWordsCollection(IEnumerable<Guid> ids)
+        {
+            if (ids == null)
+            {
+                _loggerManager.LogError("Parameter ids is null");
+                return BadRequest("Parameter ids is null");
+            }
+
+            var wordsEntities = _serviceManager.Word.GetByIds(ids, trackChanges: false);
+
+            if (ids.Count() != wordsEntities.Count())
+            {
+                _loggerManager.LogError("Some ids are not valid in a collection");
+                return NotFound();
+            }
+
+            var wordsToReturn = _mapper.Map<IEnumerable<WordDTO>>(wordsEntities);
+            return Ok(wordsToReturn);
         }
 
 
@@ -76,6 +98,32 @@ namespace EnglishTrainer.API.Controllers
             //Call another method from controller to represent a new item 
             return CreatedAtRoute("WordById", new { id = wordToReturn.Id },
                 wordToReturn);
+        }
+
+        [HttpPost("collection")]
+        public IActionResult CreateWordsCollection(
+            [FromBody] IEnumerable<WordCreateDTO> wordsCollection)
+        {
+            if (wordsCollection == null)
+            {
+                _loggerManager.LogError("Words collection sent from client is null.");
+                return BadRequest("Words collection is null");
+            }
+
+            var wordEntities = _mapper.Map<IEnumerable<Word>>(wordsCollection);
+
+            foreach (var word in wordEntities)
+            {
+                _serviceManager.Word.CreateWord(word);
+            }
+
+            _serviceManager.Save();
+
+            var wordsCollectionToReturn = _mapper.Map<IEnumerable<WordDTO>>(wordEntities);
+
+            var ids = string.Join(",", wordsCollectionToReturn.Select(x=>x.Id));
+
+            return CreatedAtRoute("WordsCollection", new { ids }, wordsCollectionToReturn);
         }
     }
 }

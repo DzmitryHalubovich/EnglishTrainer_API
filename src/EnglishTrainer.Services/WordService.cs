@@ -12,11 +12,16 @@ namespace EnglishTrainer.Services
 
         public IEnumerable<Word> GetAll(bool trackChanges) => 
             FindAll(trackChanges)
-            .OrderBy(c=>c.Name)
+            .OrderBy(x=>x.Name)
             .ToList();
 
+        public IEnumerable<Word> GetByIds(IEnumerable<Guid> Ids, bool trackChanges) =>
+            FindByCondition(x => Ids.Contains(x.Id), trackChanges)
+            .ToList();
+
+
         public Word GetWord(Guid wordId, bool trackChanges) =>
-            FindByCondition(w => w.Id.Equals(wordId), trackChanges)
+            FindByCondition(x => x.Id.Equals(wordId), trackChanges)
             .SingleOrDefault();
     }
 }
