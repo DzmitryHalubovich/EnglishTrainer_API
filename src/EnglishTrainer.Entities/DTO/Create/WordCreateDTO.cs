@@ -11,5 +11,7 @@ namespace EnglishTrainer.Entities.DTO.Create
         public string Name { get; set; }
         public string Translations { get; set; }
         public string? Description { get; set; }
+
+        public IEnumerable<ExampleCreateDTO> Examples { get; set; }
     }
 }
