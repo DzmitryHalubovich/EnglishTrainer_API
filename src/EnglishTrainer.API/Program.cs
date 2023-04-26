@@ -1,5 +1,9 @@
+using EnglishTrainer.API.Extensions;
 using EnglishTrainer.API.Extensions.ServiceExtensions;
+using EnglishTrainer.Contracts.Logger;
+using EnglishTrainer.LoggerService;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.DependencyInjection;
 using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,12 +31,6 @@ LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nl
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
 
 if (app.Environment.IsDevelopment())
 {
@@ -41,6 +39,12 @@ if (app.Environment.IsDevelopment())
 else 
 { 
     app.UseHsts(); 
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var loggerManager = scope.ServiceProvider.GetService<ILoggerManager>()!; 
+    app.ConfigureExceptionHandler(loggerManager);
 }
 
 app.UseHttpsRedirection();

@@ -12,5 +12,9 @@ namespace EnglishTrainer.Services
             FindAll(trackChanges)
             .OrderBy(c=>c.Name)
             .ToList();
+
+        public Word GetWord(Guid wordId, bool trackChanges) =>
+            FindByCondition(w => w.Id.Equals(wordId), trackChanges)
+            .SingleOrDefault();
     }
 }

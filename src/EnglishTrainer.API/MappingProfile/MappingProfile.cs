@@ -9,6 +9,8 @@ namespace EnglishTrainer.API.MappingProfile
         public MappingProfile() 
         {
             CreateMap<Word, WordDTO>();
+
+            CreateMap<Example, ExampleDTO>();
         }
 
     }

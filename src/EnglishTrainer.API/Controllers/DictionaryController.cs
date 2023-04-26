@@ -25,19 +25,27 @@ namespace EnglishTrainer.API.Controllers
         [HttpGet]
         public IActionResult GetWords()
         {
-            try
-            {
-                var dictionary = _serviceManager.Word.GetAll(trackChanges: false);
 
-                var dictionaryDTO = _mapper.Map<IEnumerable<WordDTO>>(dictionary);
-                
-                return Ok(dictionaryDTO);
-            }
-            catch (Exception ex)
+            var dictionary = _serviceManager.Word.GetAll(trackChanges: false);
+
+            var dictionaryDTO = _mapper.Map<IEnumerable<WordDTO>>(dictionary);
+
+            return Ok(dictionaryDTO);
+
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetWord(Guid id)
+        {
+            var word = _serviceManager.Word.GetWord(id, trackChanges: false);
+            if (word == null)
             {
-                _loggerManager.LogError($"Something went wrong in the {nameof(GetWords)} action {ex}");
-                return StatusCode(500, "Internal server error");
+                _loggerManager.LogInfo($"Word with id: {id} doesn't exist in the database.");
+                return NotFound();
             }
+
+            var wordDto = _mapper.Map<WordDTO>(word);
+            return Ok(wordDto);
         }
     }
 }
