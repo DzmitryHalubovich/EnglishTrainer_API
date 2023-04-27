@@ -8,7 +8,7 @@ namespace EnglishTrainer.API.ModelBinders
     {
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            if (!bindingContext.ModelMetadata.IsEnumerableType)
+            if (!bindingContext.ModelMetadata.IsEnumerableType) //Check if our parameter is IEnumerable
             {
                 bindingContext.Result = ModelBindingResult.Failed();
                 return Task.CompletedTask;
@@ -27,7 +27,7 @@ namespace EnglishTrainer.API.ModelBinders
             var genericType = bindingContext.ModelType.GetTypeInfo().GenericTypeArguments[0];
             var converter = TypeDescriptor.GetConverter(genericType);
 
-            var objectArray = providerValue.Split(new[] { "," },
+            var objectArray = providerValue.Split(new[] { "," }, //All GUIDs that we send to the API
                 StringSplitOptions.RemoveEmptyEntries)
                 .Select(x=> converter.ConvertFromString(x.Trim()))
                 .ToArray();

@@ -18,7 +18,7 @@ namespace EnglishTrainer.API.Controllers
         private readonly ILoggerManager _loggerManager;
         private readonly IMapper _mapper;
 
-        public ExampleController(IServiceManager serviceManager, 
+        public ExampleController(IServiceManager serviceManager,
             ILoggerManager loggerManager, IMapper mapper)
         {
             _serviceManager=serviceManager;
@@ -35,7 +35,7 @@ namespace EnglishTrainer.API.Controllers
             //и соответсвовали функционалу
 
             //сначала определяемся со словом для которого ищем примеры
-            var word = _serviceManager.Word.GetWord(wordId, trackChanges:false);
+            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
 
             //если не слово найдено
             if (word == null)
@@ -57,7 +57,7 @@ namespace EnglishTrainer.API.Controllers
         [HttpGet("{id}", Name = "GetExampleById")]
         public IActionResult GetSingleForWord(Guid wordId, Guid id)
         {
-            var word = _serviceManager.Word.GetWord(wordId, trackChanges:false);
+            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
 
             if (word == null)
             {
@@ -88,7 +88,7 @@ namespace EnglishTrainer.API.Controllers
                 return BadRequest("ExampleCreateDTO object is null");
             }
 
-            var word = _serviceManager.Word.GetWord(wordId, trackChanges:false);
+            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
 
             if (word == null)
             {
@@ -106,6 +106,30 @@ namespace EnglishTrainer.API.Controllers
             return CreatedAtRoute("GetExampleById",
                 new { wordId, id = exampleToReturn.Id }, exampleToReturn);
 
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteExampleForWord(Guid wordId, Guid Id)
+        {
+            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+
+            if (word == null)
+            {
+                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            var exampleForWord = _serviceManager.Example.Get(wordId, Id, trackChanges: false);
+            if (exampleForWord == null)
+            {
+                _loggerManager.LogInfo($"Example with id: {Id} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            _serviceManager.Example.DeleteExample(exampleForWord);
+            _serviceManager.Save();
+
+            return NoContent();
         }
     }
 }

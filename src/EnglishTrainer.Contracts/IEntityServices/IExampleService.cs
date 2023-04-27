@@ -8,5 +8,6 @@ namespace EnglishTrainer.Contracts.EntitiesServices
 
         Example Get(Guid wordId, Guid id, bool trackChanges);
         void CreateForWord(Guid wordId, Example example);
+        void DeleteExample(Example example);
     }
 }

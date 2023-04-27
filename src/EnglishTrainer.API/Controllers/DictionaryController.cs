@@ -126,5 +126,23 @@ namespace EnglishTrainer.API.Controllers
 
             return CreatedAtRoute("WordsCollection", new { ids }, wordsCollectionToReturn);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var word = _serviceManager.Word.GetWord(id, trackChanges: false);
+
+            if (word == null)
+            {
+                _loggerManager.LogInfo($"Word with id: {id} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            _serviceManager.Word.DeleteWord(word);
+            _serviceManager.Save();
+
+            return NoContent();
+
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace EnglishTrainer.Contracts.EntitiesServices
         IEnumerable<Word> GetByIds(IEnumerable<Guid> Ids,bool trackChanges);
         Word GetWord(Guid wordId, bool trackChanges);
         void CreateWord(Word word);
+        void DeleteWord(Word word);
     }
 }
