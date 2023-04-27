@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace EnglishTrainer.Entities.DTO.Read
 {
-    public class WordDTO
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Translations { get; set; }
-        public string? Description { get; set; }
-    }
+    public record WordDTO(
+        Guid Id,
+        string Name,
+        string? Translations,
+        string? Description);
 }

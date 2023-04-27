@@ -3780,3 +3780,406 @@
 2023-04-26 15:45:43.9291 Trace  Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
 2023-04-26 15:45:43.9291 Trace FileTarget(Name=logfile) has 2 layouts
 2023-04-26 15:45:43.9291 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.SingleProcessFileAppender+Factory
+2023-04-27 08:00:58.6250 Info Message Template Auto Format enabled
+2023-04-27 08:00:58.6341 Debug ScanAssembly('NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2023-04-27 08:00:58.6341 Debug Setting 'NLog.Targets.FileTarget.Name' to 'logfile'
+2023-04-27 08:00:58.6474 Debug Setting 'NLog.Targets.FileTarget.FileName' to 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 08:00:58.6474 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 08:00:58.6474 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 08:00:58.6474 Debug Setting 'NLog.Targets.FileTarget.Layout' to '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 08:00:58.6474 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 08:00:58.6474 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 08:00:58.6474 Debug Setting 'NLog.LayoutRenderers.LevelLayoutRenderer.Uppercase' to 'true'
+2023-04-27 08:00:58.6474 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 08:00:58.6474 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 08:00:58.6474 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 08:00:58.6474 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 08:00:58.6474 Debug Adding target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 08:00:58.6474 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 08:00:58.6474 Trace ParseRulesElement
+2023-04-27 08:00:58.6675 Debug Watching file-filter 'nlog.config' in directory: C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API
+2023-04-27 08:00:58.6675 Debug --- NLog configuration dump ---
+2023-04-27 08:00:58.6675 Debug Targets:
+2023-04-27 08:00:58.6675 Debug FileTarget(Name=logfile)
+2023-04-27 08:00:58.6675 Debug Rules:
+2023-04-27 08:00:58.6675 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]
+2023-04-27 08:00:58.6675 Debug --- End of NLog configuration dump ---
+2023-04-27 08:00:58.6675 Trace FindReachableObject<System.Object>:
+2023-04-27 08:00:58.6675 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]'
+2023-04-27 08:00:58.6675 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2023-04-27 08:00:58.6675 Trace  Scanning FileTarget 'FileTarget(Name=logfile)'
+2023-04-27 08:00:58.6675 Trace   Scanning Property FileName 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt' NLog.Layouts
+2023-04-27 08:00:58.6675 Trace   Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 08:00:58.6675 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 08:00:58.6675 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 08:00:58.6675 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 08:00:58.6675 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 08:00:58.6675 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2023-04-27 08:00:58.6675 Trace   Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2023-04-27 08:00:58.6675 Trace   Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 08:00:58.6675 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 08:00:58.6775 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 08:00:58.6775 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 08:00:58.6775 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 08:00:58.6775 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 08:00:58.6775 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 08:00:58.6775 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2023-04-27 08:00:58.6775 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2023-04-27 08:00:58.6775 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API\nlog.config
+2023-04-27 08:00:58.6775 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2023-04-27 08:00:58.6775 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2023-04-27 08:00:58.6775 Trace Initializing Layout Renderer: ${message}
+2023-04-27 08:00:58.6775 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 08:00:58.6775 Trace Initializing Layout Renderer: ${level}
+2023-04-27 08:00:58.6775 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 08:00:58.6775 Trace Initializing Layout Renderer: ${longdate}
+2023-04-27 08:00:58.6775 Trace Initializing ${longdate} ${level:uppercase=true} ${message}
+2023-04-27 08:00:58.6775 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 08:00:58.6775 Trace Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 08:00:58.6775 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 08:00:58.6775 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 08:00:58.6775 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 08:00:58.6775 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 08:00:58.6775 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 08:00:58.6775 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 08:00:58.6775 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 08:00:58.6775 Trace Initializing Layout Renderer: ${shortdate}
+2023-04-27 08:00:58.6775 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 08:00:58.6775 Trace Initializing C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt
+2023-04-27 08:00:58.6775 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 08:00:58.6775 Trace Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 08:00:58.6775 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 08:00:58.6775 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 08:00:58.6775 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 08:00:58.6775 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 08:00:58.6939 Trace Initializing FileTarget(Name=logfile)
+2023-04-27 08:00:58.6939 Trace FindReachableObject<NLog.Layouts.Layout>:
+2023-04-27 08:00:58.6939 Trace Scanning FileTarget 'FileTarget(Name=logfile)'
+2023-04-27 08:00:58.6939 Trace  Scanning Property FileName 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt' NLog.Layouts
+2023-04-27 08:00:58.6939 Trace  Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 08:00:58.6939 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2023-04-27 08:00:58.6939 Trace  Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2023-04-27 08:00:58.6939 Trace  Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 08:00:58.6939 Trace FileTarget(Name=logfile) has 2 layouts
+2023-04-27 08:00:58.6939 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.SingleProcessFileAppender+Factory
+2023-04-27 08:56:51.5691 Info AppDomain Shutting down. LogFactory closing...
+2023-04-27 08:56:51.5691 Debug Stopping file watching for path 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API' filter 'nlog.config'
+2023-04-27 08:56:51.5691 Trace Flushing all 1 targets...
+2023-04-27 08:56:51.5691 Trace ForEachItemInParallel() 1 items
+2023-04-27 08:56:51.5691 Trace FileTarget(Name=logfile): FlushAsync
+2023-04-27 08:56:51.5691 Trace Continuation invoked: 
+2023-04-27 08:56:51.5691 Trace Parallel task completed. 0 items remaining
+2023-04-27 08:56:51.5691 Debug Flush completed
+2023-04-27 08:56:51.5691 Trace FileTarget(Name=logfile): FlushAsync Done
+2023-04-27 08:56:51.5691 Debug Closing logging configuration...
+2023-04-27 08:56:51.5840 Trace Closing FileTarget(Name=logfile)
+2023-04-27 08:56:51.5840 Debug FileTarget(Name=logfile): Closing...
+2023-04-27 08:56:51.5840 Debug FileTarget(Name=logfile): Closed.
+2023-04-27 08:56:51.5840 Trace Closing C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt
+2023-04-27 08:56:51.5840 Trace Closing Layout Renderer: ${literal}
+2023-04-27 08:56:51.5840 Trace Closing Layout Renderer: ${shortdate}
+2023-04-27 08:56:51.5840 Trace Closing Layout Renderer: ${literal}
+2023-04-27 08:56:51.5840 Trace Closing ${longdate} ${level:uppercase=true} ${message}
+2023-04-27 08:56:51.5840 Trace Closing Layout Renderer: ${longdate}
+2023-04-27 08:56:51.5840 Trace Closing Layout Renderer: ${literal}
+2023-04-27 08:56:51.5840 Trace Closing Layout Renderer: ${level}
+2023-04-27 08:56:51.5840 Trace Closing Layout Renderer: ${literal}
+2023-04-27 08:56:51.5840 Trace Closing Layout Renderer: ${message}
+2023-04-27 08:56:51.5840 Debug Finished closing logging configuration.
+2023-04-27 08:56:51.5840 Info LogFactory has been closed.
+2023-04-27 09:26:09.9558 Info Message Template Auto Format enabled
+2023-04-27 09:26:09.9639 Debug ScanAssembly('NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2023-04-27 09:26:09.9807 Debug Setting 'NLog.Targets.FileTarget.Name' to 'logfile'
+2023-04-27 09:26:09.9807 Debug Setting 'NLog.Targets.FileTarget.FileName' to 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 09:26:09.9807 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:26:09.9807 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 09:26:09.9903 Debug Setting 'NLog.Targets.FileTarget.Layout' to '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 09:26:09.9903 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:26:09.9903 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 09:26:09.9903 Debug Setting 'NLog.LayoutRenderers.LevelLayoutRenderer.Uppercase' to 'true'
+2023-04-27 09:26:09.9903 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:26:09.9903 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 09:26:09.9903 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:26:09.9903 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 09:26:09.9903 Debug Adding target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 09:26:09.9903 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 09:26:09.9903 Trace ParseRulesElement
+2023-04-27 09:26:09.9903 Debug Watching file-filter 'nlog.config' in directory: C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API
+2023-04-27 09:26:10.0059 Debug --- NLog configuration dump ---
+2023-04-27 09:26:10.0059 Debug Targets:
+2023-04-27 09:26:10.0059 Debug FileTarget(Name=logfile)
+2023-04-27 09:26:10.0059 Debug Rules:
+2023-04-27 09:26:10.0059 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]
+2023-04-27 09:26:10.0059 Debug --- End of NLog configuration dump ---
+2023-04-27 09:26:10.0059 Trace FindReachableObject<System.Object>:
+2023-04-27 09:26:10.0059 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]'
+2023-04-27 09:26:10.0059 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2023-04-27 09:26:10.0059 Trace  Scanning FileTarget 'FileTarget(Name=logfile)'
+2023-04-27 09:26:10.0059 Trace   Scanning Property FileName 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt' NLog.Layouts
+2023-04-27 09:26:10.0059 Trace   Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 09:26:10.0059 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 09:26:10.0059 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:26:10.0059 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 09:26:10.0059 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:26:10.0059 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2023-04-27 09:26:10.0059 Trace   Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2023-04-27 09:26:10.0059 Trace   Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 09:26:10.0059 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 09:26:10.0059 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 09:26:10.0059 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:26:10.0059 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 09:26:10.0059 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:26:10.0059 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 09:26:10.0059 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2023-04-27 09:26:10.0213 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2023-04-27 09:26:10.0213 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API\nlog.config
+2023-04-27 09:26:10.0213 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2023-04-27 09:26:10.0213 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2023-04-27 09:26:10.0213 Trace Initializing Layout Renderer: ${message}
+2023-04-27 09:26:10.0213 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 09:26:10.0213 Trace Initializing Layout Renderer: ${level}
+2023-04-27 09:26:10.0213 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 09:26:10.0213 Trace Initializing Layout Renderer: ${longdate}
+2023-04-27 09:26:10.0213 Trace Initializing ${longdate} ${level:uppercase=true} ${message}
+2023-04-27 09:26:10.0213 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:26:10.0213 Trace Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 09:26:10.0213 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 09:26:10.0213 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 09:26:10.0213 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:26:10.0213 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 09:26:10.0213 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:26:10.0213 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 09:26:10.0213 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 09:26:10.0213 Trace Initializing Layout Renderer: ${shortdate}
+2023-04-27 09:26:10.0213 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 09:26:10.0213 Trace Initializing C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt
+2023-04-27 09:26:10.0213 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:26:10.0370 Trace Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 09:26:10.0370 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 09:26:10.0370 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:26:10.0370 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 09:26:10.0370 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:26:10.0370 Trace Initializing FileTarget(Name=logfile)
+2023-04-27 09:26:10.0370 Trace FindReachableObject<NLog.Layouts.Layout>:
+2023-04-27 09:26:10.0370 Trace Scanning FileTarget 'FileTarget(Name=logfile)'
+2023-04-27 09:26:10.0370 Trace  Scanning Property FileName 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt' NLog.Layouts
+2023-04-27 09:26:10.0370 Trace  Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 09:26:10.0370 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2023-04-27 09:26:10.0370 Trace  Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2023-04-27 09:26:10.0370 Trace  Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 09:26:10.0370 Trace FileTarget(Name=logfile) has 2 layouts
+2023-04-27 09:26:10.0370 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.SingleProcessFileAppender+Factory
+2023-04-27 09:30:55.1039 Info AppDomain Shutting down. LogFactory closing...
+2023-04-27 09:30:55.1039 Debug Stopping file watching for path 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API' filter 'nlog.config'
+2023-04-27 09:30:55.1039 Trace Flushing all 1 targets...
+2023-04-27 09:30:55.1039 Trace ForEachItemInParallel() 1 items
+2023-04-27 09:30:55.1039 Trace FileTarget(Name=logfile): FlushAsync
+2023-04-27 09:30:55.1039 Trace Continuation invoked: 
+2023-04-27 09:30:55.1039 Trace Parallel task completed. 0 items remaining
+2023-04-27 09:30:55.1039 Debug Flush completed
+2023-04-27 09:30:55.1149 Trace FileTarget(Name=logfile): FlushAsync Done
+2023-04-27 09:30:55.1149 Debug Closing logging configuration...
+2023-04-27 09:30:55.1149 Trace Closing FileTarget(Name=logfile)
+2023-04-27 09:30:55.1149 Debug FileTarget(Name=logfile): Closing...
+2023-04-27 09:30:55.1149 Debug FileTarget(Name=logfile): Closed.
+2023-04-27 09:30:55.1149 Trace Closing C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt
+2023-04-27 09:30:55.1149 Trace Closing Layout Renderer: ${literal}
+2023-04-27 09:30:55.1149 Trace Closing Layout Renderer: ${shortdate}
+2023-04-27 09:30:55.1149 Trace Closing Layout Renderer: ${literal}
+2023-04-27 09:30:55.1149 Trace Closing ${longdate} ${level:uppercase=true} ${message}
+2023-04-27 09:30:55.1149 Trace Closing Layout Renderer: ${longdate}
+2023-04-27 09:30:55.1149 Trace Closing Layout Renderer: ${literal}
+2023-04-27 09:30:55.1149 Trace Closing Layout Renderer: ${level}
+2023-04-27 09:30:55.1149 Trace Closing Layout Renderer: ${literal}
+2023-04-27 09:30:55.1149 Trace Closing Layout Renderer: ${message}
+2023-04-27 09:30:55.1149 Debug Finished closing logging configuration.
+2023-04-27 09:30:55.1149 Info LogFactory has been closed.
+2023-04-27 09:31:16.7160 Info Message Template Auto Format enabled
+2023-04-27 09:31:16.7252 Debug ScanAssembly('NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2023-04-27 09:31:16.7422 Debug Setting 'NLog.Targets.FileTarget.Name' to 'logfile'
+2023-04-27 09:31:16.7422 Debug Setting 'NLog.Targets.FileTarget.FileName' to 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 09:31:16.7422 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:31:16.7422 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 09:31:16.7422 Debug Setting 'NLog.Targets.FileTarget.Layout' to '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 09:31:16.7422 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:31:16.7422 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 09:31:16.7422 Debug Setting 'NLog.LayoutRenderers.LevelLayoutRenderer.Uppercase' to 'true'
+2023-04-27 09:31:16.7559 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:31:16.7559 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 09:31:16.7559 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:31:16.7559 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 09:31:16.7559 Debug Adding target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 09:31:16.7559 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 09:31:16.7559 Trace ParseRulesElement
+2023-04-27 09:31:16.7559 Debug Watching file-filter 'nlog.config' in directory: C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API
+2023-04-27 09:31:16.7559 Debug --- NLog configuration dump ---
+2023-04-27 09:31:16.7559 Debug Targets:
+2023-04-27 09:31:16.7559 Debug FileTarget(Name=logfile)
+2023-04-27 09:31:16.7559 Debug Rules:
+2023-04-27 09:31:16.7559 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]
+2023-04-27 09:31:16.7712 Debug --- End of NLog configuration dump ---
+2023-04-27 09:31:16.7712 Trace FindReachableObject<System.Object>:
+2023-04-27 09:31:16.7712 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]'
+2023-04-27 09:31:16.7712 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2023-04-27 09:31:16.7712 Trace  Scanning FileTarget 'FileTarget(Name=logfile)'
+2023-04-27 09:31:16.7712 Trace   Scanning Property FileName 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt' NLog.Layouts
+2023-04-27 09:31:16.7712 Trace   Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 09:31:16.7712 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 09:31:16.7712 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:31:16.7712 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 09:31:16.7712 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:31:16.7712 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2023-04-27 09:31:16.7712 Trace   Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2023-04-27 09:31:16.7712 Trace   Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 09:31:16.7712 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 09:31:16.7712 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 09:31:16.7712 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:31:16.7712 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 09:31:16.7712 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:31:16.7712 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 09:31:16.7712 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2023-04-27 09:31:16.7712 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2023-04-27 09:31:16.7712 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API\nlog.config
+2023-04-27 09:31:16.7712 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2023-04-27 09:31:16.7882 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2023-04-27 09:31:16.7882 Trace Initializing Layout Renderer: ${message}
+2023-04-27 09:31:16.7882 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 09:31:16.7882 Trace Initializing Layout Renderer: ${level}
+2023-04-27 09:31:16.7882 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 09:31:16.7882 Trace Initializing Layout Renderer: ${longdate}
+2023-04-27 09:31:16.7882 Trace Initializing ${longdate} ${level:uppercase=true} ${message}
+2023-04-27 09:31:16.7882 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:31:16.7882 Trace Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 09:31:16.7882 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 09:31:16.7882 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 09:31:16.7882 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:31:16.7882 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 09:31:16.7882 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:31:16.7882 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 09:31:16.7882 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 09:31:16.7882 Trace Initializing Layout Renderer: ${shortdate}
+2023-04-27 09:31:16.7882 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 09:31:16.7882 Trace Initializing C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt
+2023-04-27 09:31:16.7882 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 09:31:16.7882 Trace Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 09:31:16.7882 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 09:31:16.7882 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:31:16.7882 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 09:31:16.7882 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 09:31:16.7882 Trace Initializing FileTarget(Name=logfile)
+2023-04-27 09:31:16.7882 Trace FindReachableObject<NLog.Layouts.Layout>:
+2023-04-27 09:31:16.7882 Trace Scanning FileTarget 'FileTarget(Name=logfile)'
+2023-04-27 09:31:16.7882 Trace  Scanning Property FileName 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt' NLog.Layouts
+2023-04-27 09:31:16.7882 Trace  Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 09:31:16.7882 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2023-04-27 09:31:16.7882 Trace  Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2023-04-27 09:31:16.7882 Trace  Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 09:31:16.7882 Trace FileTarget(Name=logfile) has 2 layouts
+2023-04-27 09:31:16.8030 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.SingleProcessFileAppender+Factory
+2023-04-27 17:05:08.0399 Info AppDomain Shutting down. LogFactory closing...
+2023-04-27 17:05:08.0399 Debug Stopping file watching for path 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API' filter 'nlog.config'
+2023-04-27 17:05:08.0399 Trace Flushing all 1 targets...
+2023-04-27 17:05:08.0399 Trace ForEachItemInParallel() 1 items
+2023-04-27 17:05:08.0399 Trace FileTarget(Name=logfile): FlushAsync
+2023-04-27 17:05:08.0399 Trace Continuation invoked: 
+2023-04-27 17:05:08.0399 Trace Parallel task completed. 0 items remaining
+2023-04-27 17:05:08.0399 Debug Flush completed
+2023-04-27 17:05:08.0399 Trace FileTarget(Name=logfile): FlushAsync Done
+2023-04-27 17:05:08.0399 Debug Closing logging configuration...
+2023-04-27 17:05:08.0399 Trace Closing FileTarget(Name=logfile)
+2023-04-27 17:05:08.0399 Debug FileTarget(Name=logfile): Closing...
+2023-04-27 17:05:08.0541 Debug FileTarget(Name=logfile): Closed.
+2023-04-27 17:05:08.0541 Trace Closing C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt
+2023-04-27 17:05:08.0541 Trace Closing Layout Renderer: ${literal}
+2023-04-27 17:05:08.0541 Trace Closing Layout Renderer: ${shortdate}
+2023-04-27 17:05:08.0541 Trace Closing Layout Renderer: ${literal}
+2023-04-27 17:05:08.0541 Trace Closing ${longdate} ${level:uppercase=true} ${message}
+2023-04-27 17:05:08.0541 Trace Closing Layout Renderer: ${longdate}
+2023-04-27 17:05:08.0541 Trace Closing Layout Renderer: ${literal}
+2023-04-27 17:05:08.0541 Trace Closing Layout Renderer: ${level}
+2023-04-27 17:05:08.0541 Trace Closing Layout Renderer: ${literal}
+2023-04-27 17:05:08.0541 Trace Closing Layout Renderer: ${message}
+2023-04-27 17:05:08.0541 Debug Finished closing logging configuration.
+2023-04-27 17:05:08.0541 Info LogFactory has been closed.
+2023-04-27 20:42:21.2441 Info Message Template Auto Format enabled
+2023-04-27 20:42:21.2441 Debug ScanAssembly('NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c')
+2023-04-27 20:42:21.2639 Debug Setting 'NLog.Targets.FileTarget.Name' to 'logfile'
+2023-04-27 20:42:21.2639 Debug Setting 'NLog.Targets.FileTarget.FileName' to 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 20:42:21.2639 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 20:42:21.2639 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 20:42:21.2714 Debug Setting 'NLog.Targets.FileTarget.Layout' to '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 20:42:21.2714 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 20:42:21.2714 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 20:42:21.2714 Debug Setting 'NLog.LayoutRenderers.LevelLayoutRenderer.Uppercase' to 'true'
+2023-04-27 20:42:21.2714 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 20:42:21.2714 Trace Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 20:42:21.2714 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 20:42:21.2714 Trace Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 20:42:21.2714 Debug Adding target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 20:42:21.2714 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2023-04-27 20:42:21.2714 Trace ParseRulesElement
+2023-04-27 20:42:21.2862 Debug Watching file-filter 'nlog.config' in directory: C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API
+2023-04-27 20:42:21.2862 Debug --- NLog configuration dump ---
+2023-04-27 20:42:21.2862 Debug Targets:
+2023-04-27 20:42:21.2862 Debug FileTarget(Name=logfile)
+2023-04-27 20:42:21.2862 Debug Rules:
+2023-04-27 20:42:21.2862 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]
+2023-04-27 20:42:21.2862 Debug --- End of NLog configuration dump ---
+2023-04-27 20:42:21.2862 Trace FindReachableObject<System.Object>:
+2023-04-27 20:42:21.2862 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]'
+2023-04-27 20:42:21.2862 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic
+2023-04-27 20:42:21.2862 Trace  Scanning FileTarget 'FileTarget(Name=logfile)'
+2023-04-27 20:42:21.2862 Trace   Scanning Property FileName 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt' NLog.Layouts
+2023-04-27 20:42:21.2862 Trace   Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 20:42:21.2862 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 20:42:21.2862 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 20:42:21.2862 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 20:42:21.2862 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 20:42:21.2862 Trace   Scanning Property LineEnding 'Default' NLog.Targets
+2023-04-27 20:42:21.2862 Trace   Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2023-04-27 20:42:21.2862 Trace   Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 20:42:21.2862 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 20:42:21.2862 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 20:42:21.2862 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 20:42:21.2862 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 20:42:21.2862 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 20:42:21.2862 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 20:42:21.2862 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic
+2023-04-27 20:42:21.2862 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic
+2023-04-27 20:42:21.2862 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.API\nlog.config
+2023-04-27 20:42:21.3031 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2023-04-27 20:42:21.3031 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2023-04-27 20:42:21.3031 Trace Initializing Layout Renderer: ${message}
+2023-04-27 20:42:21.3031 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 20:42:21.3031 Trace Initializing Layout Renderer: ${level}
+2023-04-27 20:42:21.3031 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 20:42:21.3031 Trace Initializing Layout Renderer: ${longdate}
+2023-04-27 20:42:21.3031 Trace Initializing ${longdate} ${level:uppercase=true} ${message}
+2023-04-27 20:42:21.3031 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 20:42:21.3031 Trace Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 20:42:21.3031 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 20:42:21.3031 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2023-04-27 20:42:21.3031 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 20:42:21.3031 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2023-04-27 20:42:21.3031 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 20:42:21.3031 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2023-04-27 20:42:21.3031 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 20:42:21.3031 Trace Initializing Layout Renderer: ${shortdate}
+2023-04-27 20:42:21.3031 Trace Initializing Layout Renderer: ${literal}
+2023-04-27 20:42:21.3031 Trace Initializing C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt
+2023-04-27 20:42:21.3031 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2023-04-27 20:42:21.3031 Trace Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 20:42:21.3031 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic
+2023-04-27 20:42:21.3031 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 20:42:21.3031 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2023-04-27 20:42:21.3031 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2023-04-27 20:42:21.3031 Trace Initializing FileTarget(Name=logfile)
+2023-04-27 20:42:21.3192 Trace FindReachableObject<NLog.Layouts.Layout>:
+2023-04-27 20:42:21.3192 Trace Scanning FileTarget 'FileTarget(Name=logfile)'
+2023-04-27 20:42:21.3192 Trace  Scanning Property FileName 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt' NLog.Layouts
+2023-04-27 20:42:21.3192 Trace  Scanning SimpleLayout 'C:\Users\buxar\OneDrive\Рабочий стол\ASP.NET PET PROJECTS\EnglishTrainer_API_MVC\src\EnglishTrainer.LoggerService\logs\${shortdate}_logfile.txt'
+2023-04-27 20:42:21.3192 Trace  Scanning Property LineEnding 'Default' NLog.Targets
+2023-04-27 20:42:21.3192 Trace  Scanning Property Layout '${longdate} ${level:uppercase=true} ${message}' NLog.Layouts
+2023-04-27 20:42:21.3192 Trace  Scanning SimpleLayout '${longdate} ${level:uppercase=true} ${message}'
+2023-04-27 20:42:21.3192 Trace FileTarget(Name=logfile) has 2 layouts
+2023-04-27 20:42:21.3192 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.SingleProcessFileAppender+Factory

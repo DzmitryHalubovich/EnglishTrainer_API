@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EnglishTrainer.API.ModelBinders;
 using EnglishTrainer.Contracts;
 using EnglishTrainer.Contracts.Logger;
 using EnglishTrainer.Entities.DTO.Create;
@@ -37,7 +38,7 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpGet("collection/({ids})", Name = "WordsCollection")]
-        public IActionResult GetWordsCollection(IEnumerable<Guid> ids)
+        public IActionResult GetWordsCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids)
         {
             if (ids == null)
             {

@@ -13,5 +13,9 @@ namespace EnglishTrainer.Entities.DTO.Create
     {
         public string EnglishSentence { get; set; }
         public string? RussianSentence { get; set; }
+
+       static public string result
+
+        int cgfgd = result.Length;
     }
 }
