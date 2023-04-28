@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using EnglishTrainer.Contracts.Logger;
 using EnglishTrainer.Contracts;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using EnglishTrainer.Entities.DTO.Read;
+using EnglishTrainer.Contracts.Logger;
 using EnglishTrainer.Entities.DTO.Create;
+using EnglishTrainer.Entities.DTO.Read;
+using EnglishTrainer.Entities.DTO.Update;
 using EnglishTrainer.Entities.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishTrainer.API.Controllers
 {
@@ -47,7 +47,7 @@ namespace EnglishTrainer.API.Controllers
             //Ищем примеры по слову
             var examples = _serviceManager.Example.GetAll(wordId, trackChanges: false);
 
-            var examplesDto = _mapper.Map<IEnumerable<ExampleDTO>>(examples);
+            var examplesDto = _mapper.Map<IEnumerable<ExampleReadDTO>>(examples);
 
             return Ok(examplesDto);
         }
@@ -73,7 +73,7 @@ namespace EnglishTrainer.API.Controllers
                 return NotFound();
             }
 
-            var exampleDto = _mapper.Map<ExampleDTO>(example);
+            var exampleDto = _mapper.Map<ExampleReadDTO>(example);
             return Ok(exampleDto);
         }
         #endregion
@@ -101,7 +101,7 @@ namespace EnglishTrainer.API.Controllers
             _serviceManager.Example.CreateForWord(wordId, exampleEntity);
             _serviceManager.Save();
 
-            var exampleToReturn = _mapper.Map<ExampleDTO>(exampleEntity);
+            var exampleToReturn = _mapper.Map<ExampleReadDTO>(exampleEntity);
 
             return CreatedAtRoute("GetExampleById",
                 new { wordId, id = exampleToReturn.Id }, exampleToReturn);
@@ -127,6 +127,72 @@ namespace EnglishTrainer.API.Controllers
             }
 
             _serviceManager.Example.DeleteExample(exampleForWord);
+            _serviceManager.Save();
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateExampleForWord(Guid wordId, Guid id, [FromBody] ExampleUpdateDTO example)
+        {
+            if (example == null)
+            {
+                _loggerManager.LogError("ExampleUpdateDTO object sent from client is null.");
+                return BadRequest();
+            }
+
+            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+
+            if (word == null)
+            {
+                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            var exampleEntity = _serviceManager.Example.Get(wordId, id, trackChanges: true);
+
+            if (exampleEntity == null)
+            {
+                _loggerManager.LogInfo($"Example with id: {id} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            _mapper.Map(example, exampleEntity);
+            _serviceManager.Save();
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult PartiallyUpdateExampleForWord(Guid wordId, Guid id, 
+            [FromBody] JsonPatchDocument<ExampleUpdateDTO> patchDoc)
+        {
+            if (patchDoc == null)
+            {
+                _loggerManager.LogError("patchDoc object sent client is null.");
+                return BadRequest("patchDoc object is null");
+            }
+
+            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+            if (word == null)
+            {
+                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            var exampleEntity = _serviceManager.Example.Get(wordId, id, trackChanges:true);
+            if (exampleEntity == null)
+            {
+                _loggerManager.LogInfo($"Example with id: {id} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            //Map from Example to ExampleUpdateDTO cause JPD can can apply only to the ExampleUpdateDTO type
+            var exampleToPatch = _mapper.Map<ExampleUpdateDTO>(exampleEntity);
+
+            patchDoc.ApplyTo(exampleToPatch); //Apply changes
+
+            _mapper.Map(exampleToPatch, exampleEntity);
             _serviceManager.Save();
 
             return NoContent();

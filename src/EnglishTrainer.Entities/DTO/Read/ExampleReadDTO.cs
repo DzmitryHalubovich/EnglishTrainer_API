@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EnglishTrainer.Entities.DTO.Read
 {
-    public record ExampleDTO(
+    public record ExampleReadDTO(
         Guid Id,
         string EnglishSentence,
         string? RussianSentence);

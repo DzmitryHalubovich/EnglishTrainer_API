@@ -15,7 +15,8 @@ builder.Services.AddControllers(config =>
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true; //Будет возвращать 406 Not Acceptable
                                            //если клиент запросит неподдерживаемый возвращаемый тип данных
-}).AddXmlDataContractSerializerFormatters()
+}).AddNewtonsoftJson()
+   .AddXmlDataContractSerializerFormatters()
    .AddCustomCSVFormatter();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

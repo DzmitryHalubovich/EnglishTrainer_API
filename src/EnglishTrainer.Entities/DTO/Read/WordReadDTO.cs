@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnglishTrainer.Entities.DTO.Read
 {
-    public record WordDTO(
+    public record WordReadDTO(
         Guid Id,
         string Name,
         string? Translations,

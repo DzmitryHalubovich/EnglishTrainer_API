@@ -4,6 +4,7 @@ using EnglishTrainer.Contracts;
 using EnglishTrainer.Contracts.Logger;
 using EnglishTrainer.Entities.DTO.Create;
 using EnglishTrainer.Entities.DTO.Read;
+using EnglishTrainer.Entities.DTO.Update;
 using EnglishTrainer.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,7 @@ namespace EnglishTrainer.API.Controllers
 
             var dictionary = _serviceManager.Word.GetAll(trackChanges: false);
 
-            var dictionaryDTO = _mapper.Map<IEnumerable<WordDTO>>(dictionary);
+            var dictionaryDTO = _mapper.Map<IEnumerable<WordReadDTO>>(dictionary);
 
             return Ok(dictionaryDTO);
 
@@ -54,7 +55,7 @@ namespace EnglishTrainer.API.Controllers
                 return NotFound();
             }
 
-            var wordsToReturn = _mapper.Map<IEnumerable<WordDTO>>(wordsEntities);
+            var wordsToReturn = _mapper.Map<IEnumerable<WordReadDTO>>(wordsEntities);
             return Ok(wordsToReturn);
         }
 
@@ -70,7 +71,7 @@ namespace EnglishTrainer.API.Controllers
                 return NotFound();
             }
 
-            var wordDto = _mapper.Map<WordDTO>(word);
+            var wordDto = _mapper.Map<WordReadDTO>(word);
             return Ok(wordDto);
         }
 
@@ -94,7 +95,7 @@ namespace EnglishTrainer.API.Controllers
             _serviceManager.Word.CreateWord(wordEntity);
             _serviceManager.Save();
 
-            var wordToReturn = _mapper.Map<WordDTO>(wordEntity);
+            var wordToReturn = _mapper.Map<WordReadDTO>(wordEntity);
 
             //Call another method from controller to represent a new item 
             return CreatedAtRoute("WordById", new { id = wordToReturn.Id },
@@ -120,7 +121,7 @@ namespace EnglishTrainer.API.Controllers
 
             _serviceManager.Save();
 
-            var wordsCollectionToReturn = _mapper.Map<IEnumerable<WordDTO>>(wordEntities);
+            var wordsCollectionToReturn = _mapper.Map<IEnumerable<WordReadDTO>>(wordEntities);
 
             var ids = string.Join(",", wordsCollectionToReturn.Select(x=>x.Id));
 
@@ -143,6 +144,29 @@ namespace EnglishTrainer.API.Controllers
 
             return NoContent();
 
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateWord(Guid id, [FromBody] WordUpdateDTO word)
+        {
+            if (word == null)
+            {
+                _loggerManager.LogError("WordUpdateDTO object sent from client is null.");
+                return BadRequest("WordUpdateDTO object is null");
+            }
+
+            var wordEntity = _serviceManager.Word.GetWord(id, trackChanges: true);
+
+            if (wordEntity == null)
+            {
+                _loggerManager.LogInfo($"Word with id: {id} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            _mapper.Map(word, wordEntity);
+            _serviceManager.Save();
+
+            return NoContent();
         }
     }
 }
