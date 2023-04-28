@@ -25,6 +25,8 @@ namespace EnglishTrainer.API.Controllers
             _mapper=mapper;
         }
 
+
+
         [HttpGet]
         public IActionResult GetAllWords()
         {
@@ -36,6 +38,7 @@ namespace EnglishTrainer.API.Controllers
             return Ok(dictionaryDTO);
 
         }
+
 
 
         [HttpGet("collection/({ids})", Name = "WordsCollection")]
@@ -60,6 +63,7 @@ namespace EnglishTrainer.API.Controllers
         }
 
 
+
         //Name - дает название URL-у метода, в строке 77 по названию мы вызываем этот метод по его названию
         [HttpGet("{id}", Name = "WordById")]
         public IActionResult GetWord(Guid id)
@@ -82,12 +86,20 @@ namespace EnglishTrainer.API.Controllers
         {
             //TODO переделать сервисы под репозитории, добавить новые сервисы
 
-
             //Если не можем десирелизовать, возвращаем BadRequest
             if (word == null)
             {
                 _loggerManager.LogError("WordCreateDTO object from client is null.");
                 return BadRequest("WordCreateDTO object is null");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                _loggerManager.LogError("Invalid model state for the WordCreateDTO object");
+
+                //Custom error
+                ModelState.AddModelError("error", "По голове себе постучи, дебил!");
+                return UnprocessableEntity(ModelState);
             }
 
             var wordEntity = _mapper.Map<Word>(word);
@@ -101,6 +113,8 @@ namespace EnglishTrainer.API.Controllers
             return CreatedAtRoute("WordById", new { id = wordToReturn.Id },
                 wordToReturn);
         }
+
+
 
         [HttpPost("collection")]
         public IActionResult CreateWordsCollection(
@@ -128,8 +142,10 @@ namespace EnglishTrainer.API.Controllers
             return CreatedAtRoute("WordsCollection", new { ids }, wordsCollectionToReturn);
         }
 
+
+
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public IActionResult DeleteWord(Guid id)
         {
             var word = _serviceManager.Word.GetWord(id, trackChanges: false);
 
@@ -146,6 +162,8 @@ namespace EnglishTrainer.API.Controllers
 
         }
 
+
+
         [HttpPut("{id}")]
         public IActionResult UpdateWord(Guid id, [FromBody] WordUpdateDTO word)
         {
@@ -153,6 +171,12 @@ namespace EnglishTrainer.API.Controllers
             {
                 _loggerManager.LogError("WordUpdateDTO object sent from client is null.");
                 return BadRequest("WordUpdateDTO object is null");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                _loggerManager.LogError("Invalid model state for the WordUpdateDTO object");
+                return UnprocessableEntity(ModelState);
             }
 
             var wordEntity = _serviceManager.Word.GetWord(id, trackChanges: true);

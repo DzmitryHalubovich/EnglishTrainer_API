@@ -5,6 +5,7 @@ using EnglishTrainer.Entities.DTO.Create;
 using EnglishTrainer.Entities.DTO.Read;
 using EnglishTrainer.Entities.DTO.Update;
 using EnglishTrainer.Entities.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnglishTrainer.API.Controllers
@@ -78,6 +79,7 @@ namespace EnglishTrainer.API.Controllers
         }
         #endregion
 
+
         [HttpPost]
         public IActionResult CreateExampleForWord(Guid wordId,
             [FromBody] ExampleCreateDTO example)
@@ -86,6 +88,12 @@ namespace EnglishTrainer.API.Controllers
             {
                 _loggerManager.LogError("ExampleCreateDTO object sent from client is null.");
                 return BadRequest("ExampleCreateDTO object is null");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                _loggerManager.LogError("Invalid model state for the ExampleCreateDTO object");
+                return UnprocessableEntity(ModelState); 
             }
 
             var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
@@ -107,6 +115,8 @@ namespace EnglishTrainer.API.Controllers
                 new { wordId, id = exampleToReturn.Id }, exampleToReturn);
 
         }
+
+
 
         [HttpDelete("{id}")]
         public IActionResult DeleteExampleForWord(Guid wordId, Guid Id)
@@ -132,6 +142,8 @@ namespace EnglishTrainer.API.Controllers
             return NoContent();
         }
 
+
+
         [HttpPut("{id}")]
         public IActionResult UpdateExampleForWord(Guid wordId, Guid id, [FromBody] ExampleUpdateDTO example)
         {
@@ -139,6 +151,12 @@ namespace EnglishTrainer.API.Controllers
             {
                 _loggerManager.LogError("ExampleUpdateDTO object sent from client is null.");
                 return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                _loggerManager.LogError("Invalid model state for the ExampleUpdateDTO object");
+                return UnprocessableEntity(ModelState);
             }
 
             var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
@@ -163,6 +181,8 @@ namespace EnglishTrainer.API.Controllers
             return NoContent();
         }
 
+
+
         [HttpPatch("{id}")]
         public IActionResult PartiallyUpdateExampleForWord(Guid wordId, Guid id, 
             [FromBody] JsonPatchDocument<ExampleUpdateDTO> patchDoc)
@@ -174,6 +194,7 @@ namespace EnglishTrainer.API.Controllers
             }
 
             var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+
             if (word == null)
             {
                 _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
@@ -181,6 +202,7 @@ namespace EnglishTrainer.API.Controllers
             }
 
             var exampleEntity = _serviceManager.Example.Get(wordId, id, trackChanges:true);
+
             if (exampleEntity == null)
             {
                 _loggerManager.LogInfo($"Example with id: {id} doesn't exist in the database.");
@@ -190,12 +212,23 @@ namespace EnglishTrainer.API.Controllers
             //Map from Example to ExampleUpdateDTO cause JPD can can apply only to the ExampleUpdateDTO type
             var exampleToPatch = _mapper.Map<ExampleUpdateDTO>(exampleEntity);
 
-            patchDoc.ApplyTo(exampleToPatch); //Apply changes
+            patchDoc.ApplyTo(exampleToPatch, ModelState); //Apply changes
+
+            TryValidateModel(exampleToPatch);
+
+            if (!ModelState.IsValid)
+            {
+                _loggerManager.LogError("Invalid model state for the patch document");
+                return UnprocessableEntity(ModelState);
+            }
 
             _mapper.Map(exampleToPatch, exampleEntity);
             _serviceManager.Save();
 
             return NoContent();
         }
+
+
+
     }
 }

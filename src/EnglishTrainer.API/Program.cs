@@ -3,6 +3,7 @@ using EnglishTrainer.API.Extensions.ServiceExtensions;
 using EnglishTrainer.Contracts.Logger;
 using EnglishTrainer.LoggerService;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 
@@ -18,6 +19,12 @@ builder.Services.AddControllers(config =>
 }).AddNewtonsoftJson()
    .AddXmlDataContractSerializerFormatters()
    .AddCustomCSVFormatter();
+
+//For validation
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

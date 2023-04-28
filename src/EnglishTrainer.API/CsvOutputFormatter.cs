@@ -18,8 +18,8 @@ namespace EnglishTrainer.API
         //Проверка можно ли сериализовать
         protected override bool CanWriteType(Type type)
         {
-            if (typeof(WordDTO).IsAssignableFrom(type) ||
-                typeof(IEnumerable<WordDTO>).IsAssignableFrom(type))
+            if (typeof(WordReadDTO).IsAssignableFrom(type) ||
+                typeof(IEnumerable<WordReadDTO>).IsAssignableFrom(type))
             {
                 return base.CanWriteType(type);
             }
@@ -34,23 +34,23 @@ namespace EnglishTrainer.API
             var response = context.HttpContext.Response;
             var buffer = new StringBuilder();
 
-            if (context.Object is IEnumerable<WordDTO>)
+            if (context.Object is IEnumerable<WordReadDTO>)
             {
-                foreach (var word in (IEnumerable<WordDTO>)context.Object)
+                foreach (var word in (IEnumerable<WordReadDTO>)context.Object)
                 {
                     FormatCsv(buffer, word);
                 }
             }
             else
             {
-                FormatCsv(buffer, (WordDTO)context.Object);
+                FormatCsv(buffer, (WordReadDTO)context.Object);
             }
 
             await response.WriteAsync(buffer.ToString());
         }
 
         //Формат ответа
-        private static void FormatCsv(StringBuilder buffer, WordDTO word)
+        private static void FormatCsv(StringBuilder buffer, WordReadDTO word)
         {
             buffer.AppendLine($"{word.Id}, \"{word.Name}\", \"{word.Translations}\"");
         }
