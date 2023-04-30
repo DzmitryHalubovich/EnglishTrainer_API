@@ -7,6 +7,7 @@ using EnglishTrainer.Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using EnglishTrainer.LoggerService;
+using EnglishTrainer.API.ActionFilters;
 
 namespace EnglishTrainer.API.Controllers
 {
@@ -56,23 +57,10 @@ namespace EnglishTrainer.API.Controllers
 
         #region Get ".../{id}" Get single example for word
         [HttpGet("{id}", Name = "GetExampleById")]
-        public async Task<IActionResult> GetSingleForWord(Guid wordId, Guid id)
+        [ServiceFilter(typeof(ValidateExampleForWordExistsAttribute))]
+        public IActionResult GetSingleForWord(Guid wordId, Guid id)
         {
-            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
-
-            if (word == null)
-            {
-                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
-                return NotFound();
-            }
-
-            var example = await _repository.Example.GetAsync(wordId, id, trackChanges: false);
-
-            if (example == null)
-            {
-                _loggerManager.LogInfo($"Example with id: {id} doesn't exist in the database.");
-                return NotFound();
-            }
+            var example = HttpContext.Items["example"] as Example;
 
             var exampleDto = _mapper.Map<ExampleReadDTO>(example);
             return Ok(exampleDto);
@@ -81,63 +69,31 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPost]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateExampleForWord(Guid wordId,
             [FromBody] ExampleCreateDTO example)
         {
-            if (example == null)
-            {
-                _loggerManager.LogError("ExampleCreateDTO object sent from client is null.");
-                return BadRequest("ExampleCreateDTO object is null");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                _loggerManager.LogError("Invalid model state for the ExampleCreateDTO object");
-                return UnprocessableEntity(ModelState); 
-            }
-
-            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
-
-            if (word == null)
-            {
-                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
-                return NotFound();
-            }
-
             var exampleEntity = _mapper.Map<Example>(example);
 
             _repository.Example.CreateForWord(wordId, exampleEntity);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             var exampleToReturn = _mapper.Map<ExampleReadDTO>(exampleEntity);
 
             return CreatedAtRoute("GetExampleById",
                 new { wordId, id = exampleToReturn.Id }, exampleToReturn);
-
         }
 
 
 
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(ValidateExampleForWordExistsAttribute))]
         public async Task<IActionResult> DeleteExampleForWord(Guid wordId, Guid Id)
         {
-            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
-
-            if (word == null)
-            {
-                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
-                return NotFound();
-            }
-
-            var exampleForWord = await _repository.Example.GetAsync(wordId, Id, trackChanges: false);
-            if (exampleForWord == null)
-            {
-                _loggerManager.LogInfo($"Example with id: {Id} doesn't exist in the database.");
-                return NotFound();
-            }
+            var exampleForWord = HttpContext.Items["example"] as Example;
 
             _repository.Example.DeleteExample(exampleForWord);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             return NoContent();
         }
@@ -145,38 +101,14 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPut("{id}")]
+        [ServiceFilter(typeof(ValidationFilterAttribute)]
+        [ServiceFilter(typeof(ValidateExampleForWordExistsAttribute)]
         public async Task<IActionResult> UpdateExampleForWord(Guid wordId, Guid id, [FromBody] ExampleUpdateDTO example)
         {
-            if (example == null)
-            {
-                _loggerManager.LogError("ExampleUpdateDTO object sent from client is null.");
-                return BadRequest();
-            }
-
-            if (!ModelState.IsValid)
-            {
-                _loggerManager.LogError("Invalid model state for the ExampleUpdateDTO object");
-                return UnprocessableEntity(ModelState);
-            }
-
-            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
-
-            if (word == null)
-            {
-                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
-                return NotFound();
-            }
-
-            var exampleEntity = await _repository.Example.GetAsync(wordId, id, trackChanges: true);
-
-            if (exampleEntity == null)
-            {
-                _loggerManager.LogInfo($"Example with id: {id} doesn't exist in the database.");
-                return NotFound();
-            }
+            var exampleEntity = HttpContext.Items["example"] as Example;
 
             _mapper.Map(example, exampleEntity);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             return NoContent();
         }
@@ -184,6 +116,7 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPatch("{id}")]
+        [ServiceFilter(typeof(ValidateExampleForWordExistsAttribute))]
         public async Task<IActionResult> PartiallyUpdateExampleForWord(Guid wordId, Guid id, 
             [FromBody] JsonPatchDocument<ExampleUpdateDTO> patchDoc)
         {
@@ -193,21 +126,7 @@ namespace EnglishTrainer.API.Controllers
                 return BadRequest("patchDoc object is null");
             }
 
-            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
-
-            if (word == null)
-            {
-                _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
-                return NotFound();
-            }
-
-            var exampleEntity = await _repository.Example.GetAsync(wordId, id, trackChanges: true);
-
-            if (exampleEntity == null)
-            {
-                _loggerManager.LogInfo($"Example with id: {id} doesn't exist in the database.");
-                return NotFound();
-            }
+            var exampleEntity = HttpContext.Items["example"] as Example;
 
             //Map from Example to ExampleUpdateDTO cause JPD can can apply only to the ExampleUpdateDTO type
             var exampleToPatch = _mapper.Map<ExampleUpdateDTO>(exampleEntity);
@@ -223,7 +142,7 @@ namespace EnglishTrainer.API.Controllers
             }
 
             _mapper.Map(exampleToPatch, exampleEntity);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             return NoContent();
         }
