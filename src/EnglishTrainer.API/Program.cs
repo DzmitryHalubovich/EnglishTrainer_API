@@ -1,10 +1,8 @@
 using EnglishTrainer.API.Extensions;
 using EnglishTrainer.API.Extensions.ServiceExtensions;
-using EnglishTrainer.Contracts.Logger;
 using EnglishTrainer.LoggerService;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using NLog;
 
 var builder = WebApplication.CreateBuilder(args);

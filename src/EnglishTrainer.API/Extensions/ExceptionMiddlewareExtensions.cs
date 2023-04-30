@@ -1,5 +1,5 @@
-﻿using EnglishTrainer.Contracts.Logger;
-using EnglishTrainer.Entities.Models;
+﻿using EnglishTrainer.Entities.Models;
+using EnglishTrainer.LoggerService;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 

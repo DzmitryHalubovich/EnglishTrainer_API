@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using EnglishTrainer.API.ModelBinders;
-using EnglishTrainer.Contracts;
-using EnglishTrainer.Contracts.Logger;
+using EnglishTrainer.Repositories.Interfaces;
 using EnglishTrainer.Entities.DTO.Create;
 using EnglishTrainer.Entities.DTO.Read;
 using EnglishTrainer.Entities.DTO.Update;
 using EnglishTrainer.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
+using EnglishTrainer.LoggerService;
 
 namespace EnglishTrainer.API.Controllers
 {
@@ -14,13 +14,13 @@ namespace EnglishTrainer.API.Controllers
     [ApiController]
     public class DictionaryController : ControllerBase
     {
-        private readonly IServiceManager _serviceManager;
+        private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _loggerManager;
         private readonly IMapper _mapper;
 
-        public DictionaryController(IServiceManager serviceManager, ILoggerManager loggerManager, IMapper mapper)
+        public DictionaryController(IRepositoryManager repository, ILoggerManager loggerManager, IMapper mapper)
         {
-            _serviceManager=serviceManager;
+            _repository=repository;
             _loggerManager=loggerManager;
             _mapper=mapper;
         }
@@ -28,21 +28,20 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpGet]
-        public IActionResult GetAllWords()
+        public async Task<IActionResult> GetAllWords()
         {
 
-            var dictionary = _serviceManager.Word.GetAll(trackChanges: false);
+            var dictionary = await _repository.Word.GetAllAsync(trackChanges: false);
 
             var dictionaryDTO = _mapper.Map<IEnumerable<WordReadDTO>>(dictionary);
 
             return Ok(dictionaryDTO);
-
         }
 
 
 
         [HttpGet("collection/({ids})", Name = "WordsCollection")]
-        public IActionResult GetWordsCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids)
+        public async Task<IActionResult> GetWordsCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids)
         {
             if (ids == null)
             {
@@ -50,7 +49,7 @@ namespace EnglishTrainer.API.Controllers
                 return BadRequest("Parameter ids is null");
             }
 
-            var wordsEntities = _serviceManager.Word.GetByIds(ids, trackChanges: false);
+            var wordsEntities = await _repository.Word.GetByIdsAsync(ids, trackChanges: false);
 
             if (ids.Count() != wordsEntities.Count())
             {
@@ -66,9 +65,9 @@ namespace EnglishTrainer.API.Controllers
 
         //Name - дает название URL-у метода, в строке 77 по названию мы вызываем этот метод по его названию
         [HttpGet("{id}", Name = "WordById")]
-        public IActionResult GetWord(Guid id)
+        public async Task<IActionResult> GetWord(Guid id)
         {
-            var word = _serviceManager.Word.GetWord(id, trackChanges: false);
+            var word = await _repository.Word.GetAsync(id, trackChanges: false);
             if (word == null)
             {
                 _loggerManager.LogInfo($"Word with id: {id} doesn't exist in the database.");
@@ -82,7 +81,7 @@ namespace EnglishTrainer.API.Controllers
 
         [HttpPost]
         //Данные приходят из тела запроса, а не из URL,так что пишем FromBody
-        public IActionResult CreateWord([FromBody] WordCreateDTO word)
+        public async Task<IActionResult> CreateWord([FromBody] WordCreateDTO word)
         {
             //TODO переделать сервисы под репозитории, добавить новые сервисы
 
@@ -104,8 +103,8 @@ namespace EnglishTrainer.API.Controllers
 
             var wordEntity = _mapper.Map<Word>(word);
 
-            _serviceManager.Word.CreateWord(wordEntity);
-            _serviceManager.Save();
+            _repository.Word.CreateWord(wordEntity);
+            _repository.SaveAsync();
 
             var wordToReturn = _mapper.Map<WordReadDTO>(wordEntity);
 
@@ -117,7 +116,7 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPost("collection")]
-        public IActionResult CreateWordsCollection(
+        public async Task<IActionResult> CreateWordsCollection(
             [FromBody] IEnumerable<WordCreateDTO> wordsCollection)
         {
             if (wordsCollection == null)
@@ -130,10 +129,10 @@ namespace EnglishTrainer.API.Controllers
 
             foreach (var word in wordEntities)
             {
-                _serviceManager.Word.CreateWord(word);
+                _repository.Word.CreateWord(word);
             }
 
-            _serviceManager.Save();
+            _repository.SaveAsync();
 
             var wordsCollectionToReturn = _mapper.Map<IEnumerable<WordReadDTO>>(wordEntities);
 
@@ -145,9 +144,9 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteWord(Guid id)
+        public async Task<IActionResult> DeleteWord(Guid id)
         {
-            var word = _serviceManager.Word.GetWord(id, trackChanges: false);
+            var word = await _repository.Word.GetAsync(id, trackChanges: false);
 
             if (word == null)
             {
@@ -155,17 +154,16 @@ namespace EnglishTrainer.API.Controllers
                 return NotFound();
             }
 
-            _serviceManager.Word.DeleteWord(word);
-            _serviceManager.Save();
+            _repository.Word.DeleteWord(word);
+            _repository.SaveAsync();
 
             return NoContent();
-
         }
 
 
 
         [HttpPut("{id}")]
-        public IActionResult UpdateWord(Guid id, [FromBody] WordUpdateDTO word)
+        public async Task<IActionResult> UpdateWord(Guid id, [FromBody] WordUpdateDTO word)
         {
             if (word == null)
             {
@@ -179,7 +177,7 @@ namespace EnglishTrainer.API.Controllers
                 return UnprocessableEntity(ModelState);
             }
 
-            var wordEntity = _serviceManager.Word.GetWord(id, trackChanges: true);
+            var wordEntity = await _repository.Word.GetAsync(id, trackChanges: true);
 
             if (wordEntity == null)
             {
@@ -188,7 +186,7 @@ namespace EnglishTrainer.API.Controllers
             }
 
             _mapper.Map(word, wordEntity);
-            _serviceManager.Save();
+            _repository.SaveAsync();
 
             return NoContent();
         }

@@ -1,8 +1,7 @@
-﻿using EnglishTrainer.Contracts;
-using EnglishTrainer.Contracts.Logger;
+﻿using EnglishTrainer.Repositories.Interfaces;
 using EnglishTrainer.Entities;
 using EnglishTrainer.LoggerService;
-using EnglishTrainer.Services;
+using EnglishTrainer.Repositories.Implemintations;
 using Microsoft.EntityFrameworkCore;
 
 namespace EnglishTrainer.API.Extensions.ServiceExtensions
@@ -31,7 +30,7 @@ namespace EnglishTrainer.API.Extensions.ServiceExtensions
             opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) => 
-            services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
 
         //Кастомный форматтер
         public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder) => 

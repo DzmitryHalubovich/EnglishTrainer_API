@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EnglishTrainer.LoggerService\EnglishTrainer.LoggerService.csproj" />
-    <ProjectReference Include="..\EnglishTrainer.Services\EnglishTrainer.Services.csproj" />
+    <ProjectReference Include="..\EnglishTrainer.Repositories\EnglishTrainer.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

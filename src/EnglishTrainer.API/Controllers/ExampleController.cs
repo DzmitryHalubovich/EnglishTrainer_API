@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using EnglishTrainer.Contracts;
-using EnglishTrainer.Contracts.Logger;
+using EnglishTrainer.Repositories.Interfaces;
 using EnglishTrainer.Entities.DTO.Create;
 using EnglishTrainer.Entities.DTO.Read;
 using EnglishTrainer.Entities.DTO.Update;
 using EnglishTrainer.Entities.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using EnglishTrainer.LoggerService;
 
 namespace EnglishTrainer.API.Controllers
 {
@@ -15,14 +15,14 @@ namespace EnglishTrainer.API.Controllers
     public class ExampleController : ControllerBase
     {
         #region Constructor and DI propherties
-        private readonly IServiceManager _serviceManager;
+        private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _loggerManager;
         private readonly IMapper _mapper;
 
-        public ExampleController(IServiceManager serviceManager,
+        public ExampleController(IRepositoryManager repository,
             ILoggerManager loggerManager, IMapper mapper)
         {
-            _serviceManager=serviceManager;
+            _repository=repository;
             _loggerManager=loggerManager;
             _mapper=mapper;
         }
@@ -30,13 +30,13 @@ namespace EnglishTrainer.API.Controllers
 
         #region Get "..." Get all examples for word method
         [HttpGet]
-        public IActionResult GetAllForWord(Guid wordId)
+        public async Task<IActionResult> GetAllForWord(Guid wordId)
         {
             //TODO перепроверить все названия методов в сервисах что бы были адекватными
             //и соответсвовали функционалу
 
             //сначала определяемся со словом для которого ищем примеры
-            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
 
             //если не слово найдено
             if (word == null)
@@ -46,7 +46,7 @@ namespace EnglishTrainer.API.Controllers
             }
 
             //Ищем примеры по слову
-            var examples = _serviceManager.Example.GetAll(wordId, trackChanges: false);
+            var examples = await _repository.Example.GetAllAsync(wordId, trackChanges: false);
 
             var examplesDto = _mapper.Map<IEnumerable<ExampleReadDTO>>(examples);
 
@@ -56,9 +56,9 @@ namespace EnglishTrainer.API.Controllers
 
         #region Get ".../{id}" Get single example for word
         [HttpGet("{id}", Name = "GetExampleById")]
-        public IActionResult GetSingleForWord(Guid wordId, Guid id)
+        public async Task<IActionResult> GetSingleForWord(Guid wordId, Guid id)
         {
-            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
 
             if (word == null)
             {
@@ -66,7 +66,7 @@ namespace EnglishTrainer.API.Controllers
                 return NotFound();
             }
 
-            var example = _serviceManager.Example.Get(wordId, id, trackChanges: false);
+            var example = await _repository.Example.GetAsync(wordId, id, trackChanges: false);
 
             if (example == null)
             {
@@ -81,7 +81,7 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPost]
-        public IActionResult CreateExampleForWord(Guid wordId,
+        public async Task<IActionResult> CreateExampleForWord(Guid wordId,
             [FromBody] ExampleCreateDTO example)
         {
             if (example == null)
@@ -96,7 +96,7 @@ namespace EnglishTrainer.API.Controllers
                 return UnprocessableEntity(ModelState); 
             }
 
-            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
 
             if (word == null)
             {
@@ -106,8 +106,8 @@ namespace EnglishTrainer.API.Controllers
 
             var exampleEntity = _mapper.Map<Example>(example);
 
-            _serviceManager.Example.CreateForWord(wordId, exampleEntity);
-            _serviceManager.Save();
+            _repository.Example.CreateForWord(wordId, exampleEntity);
+            _repository.SaveAsync();
 
             var exampleToReturn = _mapper.Map<ExampleReadDTO>(exampleEntity);
 
@@ -119,9 +119,9 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteExampleForWord(Guid wordId, Guid Id)
+        public async Task<IActionResult> DeleteExampleForWord(Guid wordId, Guid Id)
         {
-            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
 
             if (word == null)
             {
@@ -129,15 +129,15 @@ namespace EnglishTrainer.API.Controllers
                 return NotFound();
             }
 
-            var exampleForWord = _serviceManager.Example.Get(wordId, Id, trackChanges: false);
+            var exampleForWord = await _repository.Example.GetAsync(wordId, Id, trackChanges: false);
             if (exampleForWord == null)
             {
                 _loggerManager.LogInfo($"Example with id: {Id} doesn't exist in the database.");
                 return NotFound();
             }
 
-            _serviceManager.Example.DeleteExample(exampleForWord);
-            _serviceManager.Save();
+            _repository.Example.DeleteExample(exampleForWord);
+            _repository.SaveAsync();
 
             return NoContent();
         }
@@ -145,7 +145,7 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult UpdateExampleForWord(Guid wordId, Guid id, [FromBody] ExampleUpdateDTO example)
+        public async Task<IActionResult> UpdateExampleForWord(Guid wordId, Guid id, [FromBody] ExampleUpdateDTO example)
         {
             if (example == null)
             {
@@ -159,7 +159,7 @@ namespace EnglishTrainer.API.Controllers
                 return UnprocessableEntity(ModelState);
             }
 
-            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
 
             if (word == null)
             {
@@ -167,7 +167,7 @@ namespace EnglishTrainer.API.Controllers
                 return NotFound();
             }
 
-            var exampleEntity = _serviceManager.Example.Get(wordId, id, trackChanges: true);
+            var exampleEntity = await _repository.Example.GetAsync(wordId, id, trackChanges: true);
 
             if (exampleEntity == null)
             {
@@ -176,7 +176,7 @@ namespace EnglishTrainer.API.Controllers
             }
 
             _mapper.Map(example, exampleEntity);
-            _serviceManager.Save();
+            _repository.SaveAsync();
 
             return NoContent();
         }
@@ -184,7 +184,7 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPatch("{id}")]
-        public IActionResult PartiallyUpdateExampleForWord(Guid wordId, Guid id, 
+        public async Task<IActionResult> PartiallyUpdateExampleForWord(Guid wordId, Guid id, 
             [FromBody] JsonPatchDocument<ExampleUpdateDTO> patchDoc)
         {
             if (patchDoc == null)
@@ -193,7 +193,7 @@ namespace EnglishTrainer.API.Controllers
                 return BadRequest("patchDoc object is null");
             }
 
-            var word = _serviceManager.Word.GetWord(wordId, trackChanges: false);
+            var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
 
             if (word == null)
             {
@@ -201,7 +201,7 @@ namespace EnglishTrainer.API.Controllers
                 return NotFound();
             }
 
-            var exampleEntity = _serviceManager.Example.Get(wordId, id, trackChanges:true);
+            var exampleEntity = await _repository.Example.GetAsync(wordId, id, trackChanges: true);
 
             if (exampleEntity == null)
             {
@@ -223,12 +223,10 @@ namespace EnglishTrainer.API.Controllers
             }
 
             _mapper.Map(exampleToPatch, exampleEntity);
-            _serviceManager.Save();
+            _repository.SaveAsync();
 
             return NoContent();
         }
-
-
 
     }
 }
