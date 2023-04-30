@@ -48,6 +48,6 @@ namespace EnglishTrainer.Repositories.Implemintations
             }
         }
 
-        public void SaveAsync() => _dbContext.SaveChangesAsync();
+        public Task SaveAsync() => _dbContext.SaveChangesAsync();
     }
 }

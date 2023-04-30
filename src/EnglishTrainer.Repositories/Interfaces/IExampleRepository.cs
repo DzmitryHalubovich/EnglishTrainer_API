@@ -1,11 +1,12 @@
 ﻿using EnglishTrainer.Entities.Models;
+using EnglishTrainer.Entities.RequestFeatures;
 
 namespace EnglishTrainer.Repositories.Interfaces
 {
     public interface IExampleRepository
     {
-        Task<IEnumerable<Example>> GetAllAsync(Guid wordId, bool trackChanges);
-
+        Task<IEnumerable<Example>> GetExamplesAsync(Guid wordId, 
+            ExampleParameters exampleParameters ,bool trackChanges);
         Task<Example> GetAsync(Guid wordId, Guid id, bool trackChanges);
         void CreateForWord(Guid wordId, Example example);
         void DeleteExample(Example example);

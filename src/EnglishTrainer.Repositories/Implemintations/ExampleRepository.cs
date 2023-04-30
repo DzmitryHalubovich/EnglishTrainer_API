@@ -2,6 +2,7 @@
 using EnglishTrainer.Entities;
 using EnglishTrainer.Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using EnglishTrainer.Entities.RequestFeatures;
 
 namespace EnglishTrainer.Repositories.Implemintations
 {
@@ -25,12 +26,12 @@ namespace EnglishTrainer.Repositories.Implemintations
             && e.Id.Equals(id), trackChanges)
             .SingleOrDefaultAsync();
 
-        public async Task<IEnumerable<Example>> GetAllAsync(Guid wordId, bool trackChanges) =>
+        public async Task<IEnumerable<Example>> GetExamplesAsync(Guid wordId, ExampleParameters exampleParameters, 
+            bool trackChanges) =>
              await FindByCondition(e => e.WordId.Equals(wordId), trackChanges)
             .OrderBy(e => e.Id)
+            .Skip((exampleParameters.PageNumber -1)*exampleParameters.PageSize)
+            .Take(exampleParameters.PageSize)
             .ToListAsync();
-
-
     }
-
 }
