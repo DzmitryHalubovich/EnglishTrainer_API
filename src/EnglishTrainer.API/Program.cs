@@ -1,3 +1,4 @@
+using EnglishTrainer.API.ActionFilters;
 using EnglishTrainer.API.Extensions;
 using EnglishTrainer.API.Extensions.ServiceExtensions;
 using EnglishTrainer.LoggerService;
@@ -18,11 +19,14 @@ builder.Services.AddControllers(config =>
    .AddXmlDataContractSerializerFormatters()
    .AddCustomCSVFormatter();
 
+
 //For validation
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
+
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -41,6 +45,12 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //NLog
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
+//Custom filter
+builder.Services.AddScoped<ValidationFilterAttribute>();
+builder.Services.AddScoped<ValidateWordExistAttribute>();
+builder.Services.AddScoped<ValidateExampleForWordExistsAttribute>();
+
 
 var app = builder.Build();
 

@@ -12,6 +12,6 @@ namespace EnglishTrainer.Repositories.Interfaces
         IExampleRepository Example { get; }
         IWordRepository Word { get; }
         IIrregularVerbRepository IrregularVerb { get; }
-        void SaveAsync();
+        Task SaveAsync();
     }
 }

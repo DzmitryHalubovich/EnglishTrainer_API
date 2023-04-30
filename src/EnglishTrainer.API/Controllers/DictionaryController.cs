@@ -7,6 +7,7 @@ using EnglishTrainer.Entities.DTO.Update;
 using EnglishTrainer.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using EnglishTrainer.LoggerService;
+using EnglishTrainer.API.ActionFilters;
 
 namespace EnglishTrainer.API.Controllers
 {
@@ -65,46 +66,26 @@ namespace EnglishTrainer.API.Controllers
 
         //Name - дает название URL-у метода, в строке 77 по названию мы вызываем этот метод по его названию
         [HttpGet("{id}", Name = "WordById")]
-        public async Task<IActionResult> GetWord(Guid id)
+        [ServiceFilter(typeof(ValidateWordExistAttribute))]
+        public IActionResult GetWord(Guid id)
         {
-            var word = await _repository.Word.GetAsync(id, trackChanges: false);
-            if (word == null)
-            {
-                _loggerManager.LogInfo($"Word with id: {id} doesn't exist in the database.");
-                return NotFound();
-            }
+            var word = HttpContext.Items["word"] as Word;
 
             var wordDto = _mapper.Map<WordReadDTO>(word);
             return Ok(wordDto);
         }
 
 
+
         [HttpPost]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         //Данные приходят из тела запроса, а не из URL,так что пишем FromBody
         public async Task<IActionResult> CreateWord([FromBody] WordCreateDTO word)
         {
-            //TODO переделать сервисы под репозитории, добавить новые сервисы
-
-            //Если не можем десирелизовать, возвращаем BadRequest
-            if (word == null)
-            {
-                _loggerManager.LogError("WordCreateDTO object from client is null.");
-                return BadRequest("WordCreateDTO object is null");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                _loggerManager.LogError("Invalid model state for the WordCreateDTO object");
-
-                //Custom error
-                ModelState.AddModelError("error", "По голове себе постучи, дебил!");
-                return UnprocessableEntity(ModelState);
-            }
-
             var wordEntity = _mapper.Map<Word>(word);
 
             _repository.Word.CreateWord(wordEntity);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             var wordToReturn = _mapper.Map<WordReadDTO>(wordEntity);
 
@@ -119,12 +100,6 @@ namespace EnglishTrainer.API.Controllers
         public async Task<IActionResult> CreateWordsCollection(
             [FromBody] IEnumerable<WordCreateDTO> wordsCollection)
         {
-            if (wordsCollection == null)
-            {
-                _loggerManager.LogError("Words collection sent from client is null.");
-                return BadRequest("Words collection is null");
-            }
-
             var wordEntities = _mapper.Map<IEnumerable<Word>>(wordsCollection);
 
             foreach (var word in wordEntities)
@@ -132,7 +107,7 @@ namespace EnglishTrainer.API.Controllers
                 _repository.Word.CreateWord(word);
             }
 
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             var wordsCollectionToReturn = _mapper.Map<IEnumerable<WordReadDTO>>(wordEntities);
 
@@ -144,18 +119,13 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpDelete("{id}")]
+        [ServiceFilter(typeof(ValidateWordExistAttribute))]
         public async Task<IActionResult> DeleteWord(Guid id)
         {
-            var word = await _repository.Word.GetAsync(id, trackChanges: false);
-
-            if (word == null)
-            {
-                _loggerManager.LogInfo($"Word with id: {id} doesn't exist in the database.");
-                return NotFound();
-            }
+            var word = HttpContext.Items["word"] as Word;
 
             _repository.Word.DeleteWord(word);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             return NoContent();
         }
@@ -163,30 +133,14 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPut("{id}")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ServiceFilter(typeof(ValidateWordExistAttribute))]
         public async Task<IActionResult> UpdateWord(Guid id, [FromBody] WordUpdateDTO word)
         {
-            if (word == null)
-            {
-                _loggerManager.LogError("WordUpdateDTO object sent from client is null.");
-                return BadRequest("WordUpdateDTO object is null");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                _loggerManager.LogError("Invalid model state for the WordUpdateDTO object");
-                return UnprocessableEntity(ModelState);
-            }
-
-            var wordEntity = await _repository.Word.GetAsync(id, trackChanges: true);
-
-            if (wordEntity == null)
-            {
-                _loggerManager.LogInfo($"Word with id: {id} doesn't exist in the database.");
-                return NotFound();
-            }
+            var wordEntity = HttpContext.Items["word"] as Word;
 
             _mapper.Map(word, wordEntity);
-            _repository.SaveAsync();
+            await _repository.SaveAsync();
 
             return NoContent();
         }
