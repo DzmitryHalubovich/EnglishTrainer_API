@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
-using EnglishTrainer.Entities.DTO;
+using EnglishTrainer.Entities.DTO.Create;
+using EnglishTrainer.Entities.DTO.Read;
+using EnglishTrainer.Entities.DTO.Update;
 using EnglishTrainer.Entities.Models;
 
 namespace EnglishTrainer.API.MappingProfile
@@ -8,9 +10,15 @@ namespace EnglishTrainer.API.MappingProfile
     {
         public MappingProfile() 
         {
-            CreateMap<Word, WordDTO>();
 
-            CreateMap<Example, ExampleDTO>();
+            CreateMap<Example, ExampleReadDTO>();
+            CreateMap<ExampleCreateDTO, Example>();
+            CreateMap<ExampleUpdateDTO, Example>().ReverseMap();
+
+            CreateMap<Word, WordReadDTO>();
+            CreateMap<WordCreateDTO, Word>();
+            CreateMap<WordUpdateDTO, Word>();
+
         }
 
     }

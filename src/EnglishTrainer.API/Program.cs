@@ -1,9 +1,8 @@
 using EnglishTrainer.API.Extensions;
 using EnglishTrainer.API.Extensions.ServiceExtensions;
-using EnglishTrainer.Contracts.Logger;
 using EnglishTrainer.LoggerService;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc;
 using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +14,15 @@ builder.Services.AddControllers(config =>
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true; //Будет возвращать 406 Not Acceptable
                                            //если клиент запросит неподдерживаемый возвращаемый тип данных
-}).AddXmlDataContractSerializerFormatters()
+}).AddNewtonsoftJson()
+   .AddXmlDataContractSerializerFormatters()
    .AddCustomCSVFormatter();
+
+//For validation
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

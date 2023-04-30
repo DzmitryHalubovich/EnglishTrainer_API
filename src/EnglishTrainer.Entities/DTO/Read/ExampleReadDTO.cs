@@ -7,15 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnglishTrainer.Entities.DTO
+namespace EnglishTrainer.Entities.DTO.Read
 {
-    public class ExampleDTO
-    {
-        public Guid Id { get; set; }
-
-        public string EnglishSentence { get; set; }
-
-        public string? RussianSentence { get; set; }
-
-    }
+    public record ExampleReadDTO(
+        Guid Id,
+        string EnglishSentence,
+        string? RussianSentence);
 }

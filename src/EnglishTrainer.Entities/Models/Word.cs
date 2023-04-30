@@ -21,7 +21,7 @@ namespace EnglishTrainer.Entities.Models
 
         [Column("translations")]
         [MaxLength(256, ErrorMessage = "Maximum lenth for the Translations is 256 characters.")]
-        public string Translations { get; set; }
+        public string? Translations { get; set; }
 
         [Column("description")]
         [MaxLength(512, ErrorMessage = "Maximum lenth for the Description is 512 characters.")]

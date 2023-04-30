@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnglishTrainer.Contracts.EntitiesServices
+namespace EnglishTrainer.Repositories.Interfaces
 {
-    public interface IIrregularVerbService
+    public interface IIrregularVerbRepository
     {
 
     }
