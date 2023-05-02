@@ -1,11 +1,12 @@
 ﻿using EnglishTrainer.Entities.Models;
+using EnglishTrainer.Entities.RequestFeatures;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EnglishTrainer.Repositories.Interfaces
 {
     public interface IWordRepository
     {
-        Task<IEnumerable<Word>> GetAllAsync(bool trackChanges);
+        Task<IEnumerable<Word>> GetWordsAsync(WordParameters wordParameters,bool trackChanges);
         /// <summary>
         /// Get single word from the database by id
         /// </summary>

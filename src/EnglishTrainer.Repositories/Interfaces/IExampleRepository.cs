@@ -5,7 +5,7 @@ namespace EnglishTrainer.Repositories.Interfaces
 {
     public interface IExampleRepository
     {
-        Task<IEnumerable<Example>> GetExamplesAsync(Guid wordId, 
+        Task<PagedList<Example>> GetExamplesAsync(Guid wordId, 
             ExampleParameters exampleParameters ,bool trackChanges);
         Task<Example> GetAsync(Guid wordId, Guid id, bool trackChanges);
         void CreateForWord(Guid wordId, Example example);

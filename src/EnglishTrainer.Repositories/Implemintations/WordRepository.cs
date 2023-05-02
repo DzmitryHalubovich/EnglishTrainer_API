@@ -2,6 +2,8 @@
 using EnglishTrainer.Entities;
 using EnglishTrainer.Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using EnglishTrainer.Entities.RequestFeatures;
+using EnglishTrainer.Repositories.Extensions;
 
 namespace EnglishTrainer.Repositories.Implemintations
 {
@@ -16,10 +18,22 @@ namespace EnglishTrainer.Repositories.Implemintations
             Delete(word);
         }
 
-        public async Task<IEnumerable<Word>> GetAllAsync(bool trackChanges) =>
-             await FindAll(trackChanges)
-            .OrderBy(x => x.Name)
-            .ToListAsync();
+        public async Task<IEnumerable<Word>> GetWordsAsync(
+            WordParameters wordParameters, bool trackChanges)
+        {
+            var words = await FindAll(trackChanges)
+                .Search(wordParameters.SearchTerm)
+                .OrderBy(w=>w.Name)
+                .Skip((wordParameters.PageNumber-1)* wordParameters.PageSize)
+                .Take(wordParameters.PageSize)
+                .ToListAsync();
+
+            var count = await FindAll(trackChanges).CountAsync();
+
+            return new PagedList<Word>(words, count, wordParameters.PageNumber,
+               wordParameters.PageSize);
+        }
+
 
         public async Task<IEnumerable<Word>> GetByIdsAsync(IEnumerable<Guid> Ids, bool trackChanges) =>
             await FindByCondition(x => Ids.Contains(x.Id), trackChanges)

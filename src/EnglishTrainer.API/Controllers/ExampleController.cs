@@ -10,6 +10,7 @@ using EnglishTrainer.LoggerService;
 using EnglishTrainer.API.ActionFilters;
 using System.ComponentModel.Design;
 using EnglishTrainer.Entities.RequestFeatures;
+using Newtonsoft.Json;
 
 namespace EnglishTrainer.API.Controllers
 {
@@ -44,6 +45,8 @@ namespace EnglishTrainer.API.Controllers
             }
 
             var examples = await _repository.Example.GetExamplesAsync(wordId, exampleParameters ,trackChanges: false);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(examples.MetaData));
 
             var examplesDto = _mapper.Map<IEnumerable<ExampleReadDTO>>(examples);
 

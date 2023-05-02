@@ -24,10 +24,21 @@ namespace EnglishTrainer.Entities.RequestFeatures
                 _pageSize = (value > maxPageSize) ? maxPageSize : value;
             }
         }
+
+        public string OrderBy {get; set; }
     }
 
     public class ExampleParameters : RequestParameters
     {
+        public string SearchTerm { get; set; }
+    }
 
+    public class WordParameters : RequestParameters
+    {
+        public WordParameters()
+        {
+            OrderBy = "name";
+        }
+        public string SearchTerm { get; set; }
     }
 }
