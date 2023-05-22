@@ -18,7 +18,7 @@ namespace EnglishTrainer.API.Controllers
     [ApiController]
     public class ExampleController : ControllerBase
     {
-        #region Constructor and DI propherties
+        
         private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _loggerManager;
         private readonly IMapper _mapper;
@@ -30,7 +30,6 @@ namespace EnglishTrainer.API.Controllers
             _loggerManager=loggerManager;
             _mapper=mapper;
         }
-        #endregion
 
         #region Get "..." Get all examples for word method
         [HttpGet]

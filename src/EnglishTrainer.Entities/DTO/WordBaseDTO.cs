@@ -13,6 +13,6 @@ namespace EnglishTrainer.Entities.DTO
         [MaxLength(512, ErrorMessage = "Maximum lenth for the Description is 512 characters.")]
         public string? Description { get; set; }
 
-        IEnumerable<ExampleCreateDTO>? Examples { get; set; }
+        public IEnumerable<ExampleCreateDTO>? Examples { get; set; }
     }
 }

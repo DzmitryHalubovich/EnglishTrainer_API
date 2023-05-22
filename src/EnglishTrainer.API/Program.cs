@@ -1,9 +1,12 @@
+using EnglishTrainer;
 using EnglishTrainer.API.ActionFilters;
 using EnglishTrainer.API.Extensions;
 using EnglishTrainer.API.Extensions.ServiceExtensions;
+using EnglishTrainer.Entities;
 using EnglishTrainer.LoggerService;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,6 +57,23 @@ builder.Services.AddScoped<ValidateExampleForWordExistsAttribute>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var scopedProvider = scope.ServiceProvider;
+    try
+    {
+        var trainerContext = scopedProvider.GetRequiredService<EFContext>();
+        if (trainerContext.Database.IsSqlServer())
+        {
+            trainerContext.Database.Migrate();
+        }
+        await EnglishTrainerContextSeed.SeedAsync(trainerContext, app.Logger);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "An error occurred adding migrations to Databse.");
+    }
+}
 
 if (app.Environment.IsDevelopment())
 {

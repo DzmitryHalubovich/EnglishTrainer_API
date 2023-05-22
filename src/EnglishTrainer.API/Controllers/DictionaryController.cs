@@ -28,7 +28,6 @@ namespace EnglishTrainer.API.Controllers
         }
 
 
-
         [HttpGet]
         public async Task<IActionResult> GetWords([FromQuery] WordParameters wordParameters)
         {
