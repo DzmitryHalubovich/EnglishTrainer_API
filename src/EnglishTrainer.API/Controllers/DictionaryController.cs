@@ -8,6 +8,7 @@ using EnglishTrainer.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using EnglishTrainer.LoggerService;
 using EnglishTrainer.API.ActionFilters;
+using EnglishTrainer.Entities.RequestFeatures;
 
 namespace EnglishTrainer.API.Controllers
 {
@@ -27,12 +28,10 @@ namespace EnglishTrainer.API.Controllers
         }
 
 
-
         [HttpGet]
-        public async Task<IActionResult> GetAllWords()
+        public async Task<IActionResult> GetWords([FromQuery] WordParameters wordParameters)
         {
-
-            var dictionary = await _repository.Word.GetAllAsync(trackChanges: false);
+            var dictionary = await _repository.Word.GetWordsAsync(wordParameters, trackChanges: false);
 
             var dictionaryDTO = _mapper.Map<IEnumerable<WordReadDTO>>(dictionary);
 

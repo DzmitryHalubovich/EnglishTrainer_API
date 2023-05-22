@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{51DAC5F1-FFD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.API", "src\EnglishTrainer.API\EnglishTrainer.API.csproj", "{D071D094-6523-4FA6-AE3D-D8C488F2D392}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Web", "src\EnglishTrainer.Web\EnglishTrainer.Web.csproj", "{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.LoggerService", "src\EnglishTrainer.LoggerService\EnglishTrainer.LoggerService.csproj", "{A8738BED-197B-46C7-9F42-690EAC9A86F6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Contracts", "src\EnglishTrainer.Contracts\EnglishTrainer.Contracts.csproj", "{8567F291-AF66-4B5E-A04E-8C3265314CF3}"
@@ -16,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Entities", "src\EnglishTrainer.Entities\EnglishTrainer.Entities.csproj", "{4AF455F8-E31F-447A-998D-E1F159360C57}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer.Repositories", "src\EnglishTrainer.Repositories\EnglishTrainer.Repositories.csproj", "{53BE465C-9C70-4550-96A1-27E1E28655A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{45E2CA91-D6E4-4605-B1A4-890D8F071E26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +27,6 @@ Global
 		{D071D094-6523-4FA6-AE3D-D8C488F2D392}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D071D094-6523-4FA6-AE3D-D8C488F2D392}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D071D094-6523-4FA6-AE3D-D8C488F2D392}.Release|Any CPU.Build.0 = Release|Any CPU
-		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A8738BED-197B-46C7-9F42-690EAC9A86F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A8738BED-197B-46C7-9F42-690EAC9A86F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8738BED-197B-46C7-9F42-690EAC9A86F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,7 +49,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D071D094-6523-4FA6-AE3D-D8C488F2D392} = {51DAC5F1-FFD4-4A16-9499-C29989213167}
-		{52A8780B-ECAD-4D23-95DC-AE2B3EFC0AF8} = {51DAC5F1-FFD4-4A16-9499-C29989213167}
 		{A8738BED-197B-46C7-9F42-690EAC9A86F6} = {51DAC5F1-FFD4-4A16-9499-C29989213167}
 		{8567F291-AF66-4B5E-A04E-8C3265314CF3} = {51DAC5F1-FFD4-4A16-9499-C29989213167}
 		{4AF455F8-E31F-447A-998D-E1F159360C57} = {51DAC5F1-FFD4-4A16-9499-C29989213167}

@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using EnglishTrainer.LoggerService;
 using EnglishTrainer.API.ActionFilters;
+using System.ComponentModel.Design;
+using EnglishTrainer.Entities.RequestFeatures;
+using Newtonsoft.Json;
 
 namespace EnglishTrainer.API.Controllers
 {
@@ -15,7 +18,7 @@ namespace EnglishTrainer.API.Controllers
     [ApiController]
     public class ExampleController : ControllerBase
     {
-        #region Constructor and DI propherties
+        
         private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _loggerManager;
         private readonly IMapper _mapper;
@@ -27,27 +30,22 @@ namespace EnglishTrainer.API.Controllers
             _loggerManager=loggerManager;
             _mapper=mapper;
         }
-        #endregion
 
         #region Get "..." Get all examples for word method
         [HttpGet]
-        public async Task<IActionResult> GetAllForWord(Guid wordId)
+        public async Task<IActionResult> GetExamplesForWord(Guid wordId, [FromQuery] ExampleParameters exampleParameters)
         {
-            //TODO перепроверить все названия методов в сервисах что бы были адекватными
-            //и соответсвовали функционалу
-
-            //сначала определяемся со словом для которого ищем примеры
             var word = await _repository.Word.GetAsync(wordId, trackChanges: false);
 
-            //если не слово найдено
             if (word == null)
             {
                 _loggerManager.LogInfo($"Word with id: {wordId} doesn't exist in the database.");
                 return NotFound();
             }
 
-            //Ищем примеры по слову
-            var examples = await _repository.Example.GetAllAsync(wordId, trackChanges: false);
+            var examples = await _repository.Example.GetExamplesAsync(wordId, exampleParameters ,trackChanges: false);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(examples.MetaData));
 
             var examplesDto = _mapper.Map<IEnumerable<ExampleReadDTO>>(examples);
 
@@ -55,17 +53,26 @@ namespace EnglishTrainer.API.Controllers
         }
         #endregion
 
+
+
         #region Get ".../{id}" Get single example for word
         [HttpGet("{id}", Name = "GetExampleById")]
-        [ServiceFilter(typeof(ValidateExampleForWordExistsAttribute))]
-        public IActionResult GetSingleForWord(Guid wordId, Guid id)
+        public async  Task<IActionResult> GetExampleForWord(Guid wordId, Guid id)
         {
-            var example = HttpContext.Items["example"] as Example;
+            var word = await _repository.Word.GetAsync(wordId, trackChanges: false); 
+            if (word == null) 
+            { 
+                _loggerManager.LogInfo($"Company with id: {wordId} doesn't exist in the database."); 
+                return NotFound(); 
+            }
+
+            var example = await _repository.Example.GetAsync(wordId,id,false);
 
             var exampleDto = _mapper.Map<ExampleReadDTO>(example);
             return Ok(exampleDto);
         }
         #endregion
+
 
 
         [HttpPost]
@@ -101,8 +108,8 @@ namespace EnglishTrainer.API.Controllers
 
 
         [HttpPut("{id}")]
-        [ServiceFilter(typeof(ValidationFilterAttribute)]
-        [ServiceFilter(typeof(ValidateExampleForWordExistsAttribute)]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ServiceFilter(typeof(ValidateExampleForWordExistsAttribute))]
         public async Task<IActionResult> UpdateExampleForWord(Guid wordId, Guid id, [FromBody] ExampleUpdateDTO example)
         {
             var exampleEntity = HttpContext.Items["example"] as Example;
